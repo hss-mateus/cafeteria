@@ -1,0 +1,11 @@
+<h1>Cafeteria</h1>
+
+<p>
+  <%= t(".message", name: @user.name) %>
+</p>
+
+<p>
+  <%= t(".message2") %>
+</p>
+
+<%= link_to t(".activate"), edit_account_activation_url(@user.activation_token) %>

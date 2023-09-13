@@ -19,6 +19,7 @@ gem "ransack"
 gem "ar_lazy_preload"
 gem "aasm"
 gem "after_commit_everywhere"
+gem "sorcery"
 
 group :development do
   gem "web-console"

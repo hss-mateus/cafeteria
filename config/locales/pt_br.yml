@@ -11,9 +11,61 @@ pt_br:
       user: Usuário
     attributes:
       user:
+        name: Nome
         email: Email
         password: Senha
+        password_confirmation: Confirmação de senha
         remember_me: Manter Conectado
+
+  layouts:
+    application:
+      register: Cadastrar
+      login: Login
+      logout: Logout
+
+  static_pages:
+    home:
+      header: Cafeteria Gourmet
+      register: Cadastre-se agora!
+
+  registrations:
+    new:
+      title: Cadastro
+      header: Crie sua conta
+      submit_text: Criar
+      success: Por favor verifique seu email para ativar sua conta
+    create:
+      success: Conta criada com sucesso! Ative através do email enviado
+    edit:
+      title: Cadastro
+      header: Edite sua conta
+      submit_text: Editar
+    update:
+      success: Conta atualizada
+
+  sessions:
+    unauthenticated: Por favor faça login para continuar
+    new:
+      title: Login
+      header: Login
+      submit: Entrar
+      new_user: Novo usuário?
+      sign_up: Crie sua conta!
+    create:
+      inactive: Você ainda não ativou a sua conta. Ative através do email enviado para você.
+      invalid: Email ou senha incorretos
+
+  account_activations:
+    edit:
+      success: Conta ativada com sucesso
+      failure: Link de ativação inválido
+
+  user_mailer:
+    activation_needed:
+      subject: Cafeteria - Ativação de Conta
+      message: Olá, %{name}
+      message2: "Você realizou seu cadastro na cafeteria. Clique no link a seguir para ativar sua conta:"
+      activate: Ativar
 
   date:
     abbr_day_names:

@@ -1,0 +1,35 @@
+<% provide :title, t(".title") %>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="fw-bold">
+      <%= t(".header") %>
+    </h1>
+
+    <%= form_with model: @user, url: session_path do |f| %>
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, class: "form-control" %>
+        <%= f.error_for :email %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, class: "form-label" %>
+        <%= f.password_field :password, class: "form-control" %>
+        <%= f.error_for :password %>
+      </div>
+
+      <div class="mb-3 form-check">
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, class: "form-check-label" %>
+      </div>
+
+      <%= f.submit t(".submit"), class: "btn btn-primary" %>
+    <% end %>
+
+    <p class="mt-3">
+      <%= t(".new_user") %>
+      <%= link_to t(".sign_up"), [:new, :registration] %>
+    </p>
+  </div>
+</div>
