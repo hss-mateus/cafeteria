@@ -199,6 +199,26 @@ pt_br:
       wrong_length:
         one: não possui o tamanho esperado (1 caracter)
         other: não possui o tamanho esperado (%{count} caracteres)
+      content_type_invalid: tem um formato inválido
+      file_size_out_of_range: "tamanho (%{file_size}) está fora dos limites"
+      limit_out_of_range: "quantidade fora dos limites"
+      image_metadata_missing: "não é uma imagem válida"
+      dimension_min_inclusion: "precisa ser maior ou igual a %{width} x %{height} pixels"
+      dimension_max_inclusion: "precisa ser menor ou igual a %{width} x %{height} pixels"
+      dimension_width_inclusion: "largura não está entre %{min} e %{max} pixels"
+      dimension_height_inclusion: "altura não está entre %{min} e %{max} pixels"
+      dimension_width_greater_than_or_equal_to: "largura precisa ser maior ou igual a %{length} pixels"
+      dimension_height_greater_than_or_equal_to: "altura precisa ser maior ou igual a %{length} pixels"
+      dimension_width_less_than_or_equal_to:  "largura precisa ser menor ou igual a %{length} pixels"
+      dimension_height_less_than_or_equal_to: "altura precisa ser menor ou igual a %{length} pixels"
+      dimension_width_equal_to: "largura precisa ser igual a %{length} pixels"
+      dimension_height_equal_to: "altura precisa ser igual a %{length} pixels"
+      aspect_ratio_not_square: "precisa ser uma imagem quadrada"
+      aspect_ratio_not_portrait: "precisa estar em modo retrato"
+      aspect_ratio_not_landscape: "precisa estar em modo paisagem"
+      aspect_ratio_is_not: "precisa ter uma proporção de %{aspect_ratio}"
+      aspect_ratio_unknown: "tem uma proporção desconhecida"
+      image_not_processable: "não é uma imagem válida"
     template:
       body: 'Por favor, verifique o(s) seguinte(s) campo(s):'
       header:
