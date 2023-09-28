@@ -1,0 +1,60 @@
+name: CI
+on: [push]
+
+jobs:
+  check_and_test:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    services:
+      postgres:
+        image: postgres:alpine
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install additional OS packages
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: libvips42
+          version: 1.0
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          cache: yarn
+
+      - name: Setup application
+        run: bin/setup
+
+      - name: Build assets
+        run: |
+          bin/rails css:build
+          bin/rails javascript:build
+
+      - name: Setup test database
+        run: |
+          bin/rails db:test:prepare
+          bin/rails db:seed RAILS_ENV=test
+
+      - name: Run tests
+        run: bin/rails test
