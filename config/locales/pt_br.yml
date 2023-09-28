@@ -45,6 +45,7 @@ pt_br:
 
   sessions:
     unauthenticated: Por favor faça login para continuar
+    unauthorized: Você não tem permissão para esta ação
     new:
       title: Login
       header: Login

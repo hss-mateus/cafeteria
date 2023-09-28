@@ -5,4 +5,7 @@
 import { application } from "./application"
 
 import MaskController from "./mask_controller"
+import RoleController from "./role_controller"
+
 application.register("mask", MaskController)
+application.register("role", RoleController)
