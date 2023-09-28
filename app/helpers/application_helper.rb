@@ -24,4 +24,8 @@ module ApplicationHelper
     when "alert" then "bi-exclamation-triangle-fill"
     end
   end
+
+  def cents_to_currency(cents)
+    number_to_currency(Money.new(cents:))
+  end
 end
