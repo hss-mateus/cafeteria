@@ -11,6 +11,7 @@
 #  name                         :string
 #  remember_me_token            :string
 #  remember_me_token_expires_at :datetime
+#  role                         :integer          default("customer"), not null
 #  salt                         :string
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
@@ -23,6 +24,12 @@
 #
 class User < ApplicationRecord
   authenticates_with_sorcery!
+
+  enum role: {
+    customer: 0,
+    employee: 1,
+    manager: 2
+  }
 
   validates :name, :email, presence: true
   validates :name, length: { maximum: 50 }

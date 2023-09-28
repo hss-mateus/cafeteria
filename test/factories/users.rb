@@ -11,6 +11,7 @@
 #  name                         :string
 #  remember_me_token            :string
 #  remember_me_token_expires_at :datetime
+#  role                         :integer          default("customer"), not null
 #  salt                         :string
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
