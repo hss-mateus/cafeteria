@@ -7,7 +7,7 @@
 #  price_cents :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  category_id :bigint
+#  category_id :bigint           not null
 #
 # Indexes
 #

@@ -7,7 +7,7 @@
 #  price_cents :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  category_id :bigint
+#  category_id :bigint           not null
 #
 # Indexes
 #
@@ -19,7 +19,7 @@
 #  fk_rails_...  (category_id => categories.id)
 #
 class Item < ApplicationRecord
-  belongs_to :category, optional: true
+  belongs_to :category
 
   has_rich_text :description
 

@@ -12,7 +12,7 @@
 #  index_categories_on_name  (name) UNIQUE
 #
 class Category < ApplicationRecord
-  has_many :items, dependent: :nullify
+  has_many :items, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 end
