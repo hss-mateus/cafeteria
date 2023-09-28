@@ -6,6 +6,8 @@ import { application } from "./application"
 
 import MaskController from "./mask_controller"
 import RoleController from "./role_controller"
+import ModalController from "./modal_controller"
 
 application.register("mask", MaskController)
 application.register("role", RoleController)
+application.register("modal", ModalController)
