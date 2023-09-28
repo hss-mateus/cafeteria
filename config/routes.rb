@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create, :edit, :update]
   resource :session, only: [:new, :create, :destroy]
   resources :account_activations, only: [:edit]
+
+  resources :categories, except: [:show]
+  resources :items, except: [:index]
 end

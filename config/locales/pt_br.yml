@@ -17,6 +17,14 @@ pt_br:
         password_confirmation: Confirmação de senha
         remember_me: Manter Conectado
 
+      item:
+        category: Categoria
+        category_id: Categoria
+        name: Nome
+        description: Descrição
+        picture: Imagem
+        price_cents: Preço
+
   layouts:
     application:
       register: Cadastrar
@@ -67,6 +75,36 @@ pt_br:
       message: Olá, %{name}
       message2: "Você realizou seu cadastro na cafeteria. Clique no link a seguir para ativar sua conta:"
       activate: Ativar
+
+  categories:
+    category:
+      delete_confirm: Você tem certeza? Todos os itens dessa categoria serão excluídos
+    index:
+      header: Menu
+      new: Nova Categoria
+    create:
+      success: Categoria adicionada com sucesso
+    update:
+      success: Categoria atualizada com sucesso
+    destroy:
+      success: Categoria removida com sucesso
+
+  items:
+    item:
+      details: Detalhes
+    new:
+      header: Novo item
+    edit:
+      header: Editar item
+    create:
+      success: Item criado com sucesso
+    update:
+      success: Item atualizado com sucesso
+    show:
+      add: Adicionar - %{value}
+      delete_confirm: Você tem certeza?
+    destroy:
+      success: Item removido com sucesso
 
   date:
     abbr_day_names:

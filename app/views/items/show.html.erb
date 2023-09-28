@@ -1,0 +1,35 @@
+<%= turbo_frame_tag :modal do %>
+  <div class="modal-header">
+    <h1 class="modal-title fw-bold">
+      <%= @item.name %>
+    </h1>
+
+    <%= link_to t(".add", value: cents_to_currency(@item.price_cents)), "#", class: "btn btn-primary ms-3" %>
+
+    <div class="btn-group" data-controller="role" data-role-required-value="manager">
+      <%= link_to [:edit, @item], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>
+        <i class="bi bi-pencil"></i>
+      <% end %>
+
+      <%= link_to @item,
+         class: "btn btn-outline-danger",
+         data: {
+           turbo_method: :delete,
+           turbo_confirm: t(".delete_confirm"),
+           turbo_frame: :_top
+         } do %>
+        <i class="bi bi-trash"></i>
+      <% end %>
+    </div>
+
+    <button class="btn-close" data-bs-dismiss="modal"></button>
+  </div>
+
+  <div class="modal-body">
+    <%= image_tag @item.picture, class: "img-fluid mb-3" if @item.picture.attached? %>
+
+    <div>
+      <%= @item.description %>
+    </div>
+  </div>
+<% end %>

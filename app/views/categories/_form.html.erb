@@ -1,0 +1,13 @@
+<%= form_with model: @category do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name, class: "form-control" %>
+
+    <button type="submit" class="btn btn-outline-primary">
+      <i class="bi bi-check"></i>
+    </button>
+
+    <%= link_to :categories, class: "btn btn-outline-primary" do %>
+      <i class="bi bi-x"></i>
+    <% end %>
+  </div>
+<% end %>

@@ -27,4 +27,5 @@ class Item < ApplicationRecord
 
   validates :price_cents, numericality: { greater_than_or_equal_to: 0 }
   validates :name, presence: true, uniqueness: true
+  validates :picture, content_type: [:png, :jpeg, :jpg, :webp]
 end

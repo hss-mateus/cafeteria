@@ -13,6 +13,6 @@
 #
 FactoryBot.define do
   factory :category do
-    name { "Beverages" }
+    sequence(:name) { "Category ##{_1}" }
   end
 end

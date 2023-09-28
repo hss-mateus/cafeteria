@@ -1,0 +1,29 @@
+<div id="<%= dom_id(category) %>">
+  <%= turbo_frame_tag category, :header do %>
+    <div class="d-flex align-items-center gap-3">
+      <h2><%= category.name %></h2>
+
+      <div class="btn-group" data-controller="role" data-role-required-value="manager">
+        <%= link_to [:new, :item, item: { category_id: category.id }],
+           class: "btn btn-outline-primary btn-sm",
+           data: { turbo_frame: :_top } do %>
+          <i class="bi bi-plus-lg"></i>
+        <% end %>
+
+        <%= link_to [:edit, category], class: "btn btn-outline-primary btn-sm" do %>
+          <i class="bi bi-pencil"></i>
+        <% end %>
+
+        <%= link_to category,
+           data: { turbo_method: :delete, turbo_confirm: t(".delete_confirm") },
+           class: "btn btn-outline-danger btn-sm" do %>
+          <i class="bi bi-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="my-3 row">
+    <%= render category.items %>
+  </div>
+</div>
