@@ -44,13 +44,11 @@
       </div>
     </div>
 
-    <% flash.each do |type, message| %>
-      <div class="alert alert-<%= flash_color(type) %> d-flex align-items-center justify-content-center gap-2 p-1 m-0 mb-3 rounded-0">
-        <i class="bi <%= flash_icon(type) %>"></i>
-
-        <strong><%= message %></strong>
-      </div>
-    <% end %>
+    <div id="flash">
+      <% flash.each do |type, message| %>
+        <%= render "shared/flash", type:, message: %>
+      <% end %>
+    </div>
 
     <div class="container mb-5">
       <%= yield %>
