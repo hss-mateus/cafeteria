@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_action :require_login, only: [:edit, :update]
+  skip_before_action :require_login, only: [:new, :create]
 
   def new
     @user = User.new

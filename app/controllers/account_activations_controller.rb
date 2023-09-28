@@ -1,4 +1,6 @@
 class AccountActivationsController < ApplicationController
+  skip_before_action :require_login
+
   def edit
     if (user = User.load_from_activation_token(params[:id]))
       user.activate!

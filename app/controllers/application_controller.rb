@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
 
   default_form_builder CustomFormBuilder
 
+  before_action :require_login
+
   private
 
   def not_authenticated
