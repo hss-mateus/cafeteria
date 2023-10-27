@@ -21,6 +21,8 @@
 class Item < ApplicationRecord
   belongs_to :category
 
+  has_many :order_items
+
   has_rich_text :description
 
   has_one_attached :picture
@@ -28,4 +30,15 @@ class Item < ApplicationRecord
   validates :price_cents, numericality: { greater_than_or_equal_to: 0 }
   validates :name, presence: true, uniqueness: true
   validates :picture, content_type: [:png, :jpeg, :jpg, :webp]
+
+  after_commit :destroy_order_items, on: :destroy
+
+  private
+
+  def destroy_order_items
+    order_items
+      .joins(:orders)
+      .where(order: { status: [:scratch, :payment_failed] })
+      .destroy_all
+  end
 end
