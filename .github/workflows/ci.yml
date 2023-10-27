@@ -30,18 +30,5 @@ jobs:
           node-version: 14
           cache: yarn
 
-      - name: Setup application
-        run: bin/setup
-
-      - name: Build assets
-        run: |
-          bin/rails css:build
-          bin/rails javascript:build
-
-      - name: Setup test database
-        run: |
-          bin/rails db:test:prepare
-          bin/rails db:seed RAILS_ENV=test
-
       - name: Run tests
         run: bin/rails test
