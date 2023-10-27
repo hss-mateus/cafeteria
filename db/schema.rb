@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_09_28_191856) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -60,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_191856) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.bigint "category_id", null: false
+    t.integer "category_id", null: false
     t.string "name", null: false
     t.integer "price_cents", null: false
     t.datetime "created_at", null: false

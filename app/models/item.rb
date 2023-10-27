@@ -2,12 +2,12 @@
 #
 # Table name: items
 #
-#  id          :bigint           not null, primary key
+#  id          :integer          not null, primary key
 #  name        :string           not null
 #  price_cents :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  category_id :bigint           not null
+#  category_id :integer          not null
 #
 # Indexes
 #
@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (category_id => categories.id)
+#  category_id  (category_id => categories.id)
 #
 class Item < ApplicationRecord
   belongs_to :category

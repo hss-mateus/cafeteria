@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                           :bigint           not null, primary key
+#  id                           :integer          not null, primary key
 #  activation_state             :string
 #  activation_token             :string
 #  activation_token_expires_at  :datetime
