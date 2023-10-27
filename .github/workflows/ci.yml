@@ -24,11 +24,10 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 14
-          cache: yarn
+          bun-version: latest
 
       - name: Run tests
         run: bin/rails test
