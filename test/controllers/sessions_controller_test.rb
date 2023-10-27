@@ -18,6 +18,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  test "shouldn't assign a session when account is inactive" do
+    create(:user, :pending_activation) => { email: }
+
+    post session_path, params: { user: { email:, password: "secret" } }
+  end
+
   test "should delete a session" do
     login_user
     delete session_path
