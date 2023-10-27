@@ -20,11 +20,16 @@ Bundler.require(*Rails.groups)
 
 module Cafeteria
   class Application < Rails::Application
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     config.i18n.default_locale = :pt_br
     config.time_zone = "America/Sao_Paulo"
     config.generators.system_tests = nil
 
     ArLazyPreload.config.auto_preload = true
+
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: ["assets", "tasks"])
   end
 end
