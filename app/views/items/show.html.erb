@@ -4,7 +4,11 @@
       <%= @item.name %>
     </h1>
 
-    <%= link_to t(".add", value: cents_to_currency(@item.price_cents)), "#", class: "btn btn-primary ms-3" %>
+    <%= button_to t(".add", value: cents_to_currency(@item.price_cents)),
+       :order_items,
+       params: { item_id: @item.id },
+       class: "btn btn-primary ms-3",
+       form: { data: { turbo_frame: :_top } } %>
 
     <div class="btn-group" data-controller="role" data-role-required-value="manager">
       <%= link_to [:edit, @item], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>

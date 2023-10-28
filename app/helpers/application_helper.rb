@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def cents_to_currency(cents)
-    number_to_currency(Money.new(cents:))
+    number_to_currency(Money.new(cents:).to_f)
   end
 
   def update_flash(message:, type: :notice)

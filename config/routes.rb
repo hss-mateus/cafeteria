@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   resources :categories, except: [:show]
   resources :items, except: [:index]
+
+  resource :order, only: [:show, :update]
+  resources :order_items, only: [:create, :update, :destroy]
 end
