@@ -19,6 +19,7 @@ gem "aasm"
 gem "after_commit_everywhere"
 gem "sorcery"
 gem "litestack"
+gem "stripe"
 
 group :development do
   gem "web-console"
