@@ -43,7 +43,7 @@
     </ul>
 
     <div class="text-center py-3">
-      <%= button_to :order, method: :put, class: "btn btn-lg btn-primary fw-bold" do %>
+      <%= button_to :order, method: :put, class: "btn btn-lg btn-primary fw-bold", form: { data: { turbo: false } } do %>
         <%= t(".pay") %>
       <% end %>
     </div>

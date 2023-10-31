@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :categories, except: [:show]
   resources :items, except: [:index]
 
-  resource :order, only: [:show, :update]
+  resource :order, only: [:show, :update] do
+    resource :payment_result, only: [:show]
+  end
+
   resources :order_items, only: [:create, :update, :destroy]
 end

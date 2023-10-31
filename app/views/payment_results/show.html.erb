@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xl-6 mx-auto">
+    <div class="alert alert-success d-flex flex-row justify-content-center">
+      <div class="border-end border-success d-flex align-items-center px-3">
+        <i class="bi bi-check-circle-fill h1"></i>
+      </div>
+
+      <div class="ms-3">
+        <h4 class="fw-bold">
+          <%= t(".title") %>
+        </h4>
+
+        <p>
+          <%= t(".message") %>
+        </p>
+      </div>
+    </div>
+
+    <h3 class="fw-bold mb-3 mt-4">
+      <%= t(".summary") %>
+    </h3>
+
+    <ul class="list-group">
+      <% @order.order_items.each do |order_item| %>
+        <li class="list-group-item d-flex justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-secondary rounded-pill">
+              <%= order_item.quantity %>
+            </span>
+            <%= order_item.item.name %>
+          </div>
+
+          <div>
+            <%= cents_to_currency(order_item.value_cents) %>
+          </div>
+        </li>
+      <% end %>
+
+      <li class="list-group-item list-group-item-light fw-bold d-flex justify-content-between">
+        <div>
+          <%= t(".total") %>
+        </div>
+
+        <div>
+          <%= cents_to_currency(@order.total_value_cents) %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

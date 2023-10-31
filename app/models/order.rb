@@ -20,12 +20,15 @@
 #
 class Order < ApplicationRecord
   include AASM
+  include Rails.application.routes.url_helpers
 
   belongs_to :user
 
   has_many :order_items, dependent: :destroy
 
   accepts_nested_attributes_for :order_items, reject_if: :all_blank, allow_destroy: true
+
+  attribute :session
 
   enum status: {
     scratch: 0,
@@ -43,17 +46,41 @@ class Order < ApplicationRecord
           :served
 
     event :start_payment do
-      transitions from: [:scratch, :payment_failed], to: :payment_started
+      transitions from: [:scratch, :payment_failed], to: :payment_started, after: :create_session
       transitions from: [:scratch, :payment_failed], to: :payment_failed
     end
 
     event :handle_payment_result do
-      transitions from: :payment_started, to: :payment_succeeded
+      transitions from: :payment_started, to: :payment_succeeded, if: ->(result) { result == "success" }
       transitions from: :payment_started, to: :payment_failed
     end
   end
 
   def calculate_total_value!
     update!(total_value_cents: order_items.sum(:value_cents))
+  end
+
+  def payment_token
+    Digest::SHA256.hexdigest([id, user_id, created_at].join)
+  end
+
+  private
+
+  def create_session
+    self.session = Stripe::Checkout::Session.create({
+      mode: "payment",
+      success_url: order_payment_result_url(status: :success, token: payment_token),
+      cancel_url: order_payment_result_url(status: :failed, token: payment_token),
+      line_items: order_items.map { |order_item|
+        {
+          quantity: order_item.quantity,
+          price_data: {
+            currency: "BRL",
+            unit_amount: order_item.item.price_cents,
+            product_data: { name: order_item.item.name }
+          }
+        }
+      }
+    })
   end
 end
