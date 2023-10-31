@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
   end
 
   def require_items
-    return if @order.order_items.any?
+    return if @order.items.any?
 
     redirect_to :order, alert: t(".failure")
   end

@@ -24,9 +24,9 @@ class Order < ApplicationRecord
 
   belongs_to :user
 
-  has_many :order_items, dependent: :destroy
+  has_many :items, dependent: :destroy, class_name: "OrderItem"
 
-  accepts_nested_attributes_for :order_items, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
 
   attribute :session
 
@@ -57,7 +57,7 @@ class Order < ApplicationRecord
   end
 
   def calculate_total_value!
-    update!(total_value_cents: order_items.sum(:value_cents))
+    update!(total_value_cents: items.sum(:value_cents))
   end
 
   def payment_token
@@ -71,13 +71,13 @@ class Order < ApplicationRecord
       mode: "payment",
       success_url: order_payment_result_url(status: :success, token: payment_token),
       cancel_url: order_payment_result_url(status: :failed, token: payment_token),
-      line_items: order_items.map { |order_item|
+      line_items: items.map { |item|
         {
-          quantity: order_item.quantity,
+          quantity: item.quantity,
           price_data: {
             currency: "BRL",
-            unit_amount: order_item.item.price_cents,
-            product_data: { name: order_item.item.name }
+            unit_amount: item.product.price_cents,
+            product_data: { name: item.product.name }
           }
         }
       }

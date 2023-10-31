@@ -1,21 +1,21 @@
 <%= turbo_frame_tag :modal do %>
   <div class="modal-header">
     <h1 class="modal-title fw-bold">
-      <%= @item.name %>
+      <%= @product.name %>
     </h1>
 
-    <%= button_to t(".add", value: cents_to_currency(@item.price_cents)),
+    <%= button_to t(".add", value: cents_to_currency(@product.price_cents)),
        :order_items,
-       params: { item_id: @item.id },
+       params: { product_id: @product.id },
        class: "btn btn-primary ms-3",
        form: { data: { turbo_frame: :_top } } %>
 
     <div class="btn-group" data-controller="role" data-role-required-value="manager">
-      <%= link_to [:edit, @item], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>
+      <%= link_to [:edit, @product], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>
         <i class="bi bi-pencil"></i>
       <% end %>
 
-      <%= link_to @item,
+      <%= link_to @product,
          class: "btn btn-outline-danger",
          data: {
            turbo_method: :delete,
@@ -30,10 +30,10 @@
   </div>
 
   <div class="modal-body">
-    <%= image_tag @item.picture, class: "img-fluid mb-3" if @item.picture.attached? %>
+    <%= image_tag @product.picture, class: "img-fluid mb-3" if @product.picture.attached? %>
 
     <div>
-      <%= @item.description %>
+      <%= @product.description %>
     </div>
   </div>
 <% end %>

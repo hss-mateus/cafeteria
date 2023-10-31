@@ -21,17 +21,17 @@
     </h3>
 
     <ul class="list-group">
-      <% @order.order_items.each do |order_item| %>
+      <% @order.items.each do |item| %>
         <li class="list-group-item d-flex justify-content-between">
           <div class="d-flex align-items-center gap-2">
             <span class="badge bg-secondary rounded-pill">
-              <%= order_item.quantity %>
+              <%= item.quantity %>
             </span>
-            <%= order_item.item.name %>
+            <%= item.item.name %>
           </div>
 
           <div>
-            <%= cents_to_currency(order_item.value_cents) %>
+            <%= cents_to_currency(item.value_cents) %>
           </div>
         </li>
       <% end %>

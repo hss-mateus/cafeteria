@@ -19,9 +19,9 @@
 #  category_id  (category_id => categories.id)
 #
 FactoryBot.define do
-  factory :item do
+  factory :product do
     category
-    sequence(:name) { "Item ##{_1}" }
+    sequence(:name) { "Product ##{_1}" }
     price_cents { 1_00 }
   end
 end

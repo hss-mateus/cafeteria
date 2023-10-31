@@ -2,11 +2,11 @@ class OrderItemsController < ApplicationController
   before_action :set_order
 
   def create
-    order_item = @order
-      .order_items
-      .create_or_find_by(item_id: params[:item_id])
+    item = @order
+      .items
+      .create_or_find_by(product_id: params[:product_id])
 
-    order_item.increment(:quantity).save unless order_item.saved_changes?
+    item.increment(:quantity).save unless item.saved_changes?
 
     @order.calculate_total_value!
 
@@ -14,9 +14,9 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    order_item = @order.order_items.find(params[:id])
-    order_item.decrement(:quantity).save
-    order_item.destroy if order_item.quantity.zero?
+    item = @order.items.find(params[:id])
+    item.decrement(:quantity).save
+    item.destroy if item.quantity.zero?
 
     @order.calculate_total_value!
 

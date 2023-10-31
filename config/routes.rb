@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
 
   resources :categories, except: [:show]
-  resources :items, except: [:index]
+  resources :products, except: [:index]
 
   resource :order, only: [:show, :update] do
     resource :payment_result, only: [:show]

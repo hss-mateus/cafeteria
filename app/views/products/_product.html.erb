@@ -3,13 +3,13 @@
     <div class="row g-0">
       <div class="col-md-8">
         <div class="card-body d-flex flex-column align-items-start h-100">
-          <h3 class="card-title fw-bold"><%= item.name %></h3>
+          <h3 class="card-title fw-bold"><%= product.name %></h3>
 
           <p class="card-text">
-            <%= cents_to_currency(item.price_cents) %>
+            <%= cents_to_currency(product.price_cents) %>
           </p>
 
-          <%= link_to item,
+          <%= link_to product,
               class: "btn btn-outline-primary stretched-link mt-auto icon-link icon-link-hover",
               data: { turbo_frame: :modal } do %>
             <%= t(".details") %>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="col-md-4 d-flex align-items-center justify-content-end">
-        <%= image_tag item.picture, class: "img-fluid rounded-end h-100 object-fit-cover", style: "max-height: 200px" if item.picture.attached? %>
+        <%= image_tag product.picture, class: "img-fluid rounded-end h-100 object-fit-cover", style: "max-height: 200px" if product.picture.attached? %>
       </div>
     </div>
   </div>

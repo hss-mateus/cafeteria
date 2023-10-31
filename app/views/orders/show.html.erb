@@ -5,25 +5,25 @@
 <div class="row justify-content-center">
   <div class="col-lg-6">
     <ul class="list-group">
-      <% @order.order_items.each do |order_item| %>
+      <% @order.items.each do |item| %>
         <li class="list-group-item">
           <div class="row align-items-center">
             <div class="col-7">
-              <%= order_item.name %>
+              <%= item.name %>
             </div>
 
             <div class="col-3">
               <div class="input-group">
-                <%= link_to "-", order_item, class: "btn btn-outline-secondary", data: { turbo_method: :delete } %>
+                <%= link_to "-", item, class: "btn btn-outline-secondary", data: { turbo_method: :delete } %>
 
-                <input type="text" size="1" class="form-control text-center bg-light" value="<%= order_item.quantity %>" disabled>
+                <input type="text" size="1" class="form-control text-center bg-light" value="<%= item.quantity %>" disabled>
 
-                <%= link_to "+", [:order_items, item_id: order_item.item_id], class: "btn btn-outline-secondary", data: { turbo_method: :post } %>
+                <%= link_to "+", [:items, item_id: item.item_id], class: "btn btn-outline-secondary", data: { turbo_method: :post } %>
               </div>
             </div>
 
             <div class="col-2 text-end">
-              <%= cents_to_currency(order_item.value_cents) %>
+              <%= cents_to_currency(item.value_cents) %>
             </div>
           </div>
         </li>

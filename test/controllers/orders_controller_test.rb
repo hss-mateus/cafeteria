@@ -34,7 +34,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order status when it has at least one item" do
-    order = create(:order, user: @user, order_items: [build(:order_item)])
+    order = create(:order, user: @user, items: [build(:order_item)])
 
     assert_changes "order.reload.status", from: "scratch", to: "payment_started" do
       put order_path

@@ -1,18 +1,18 @@
-class ItemsController < ApplicationController
+class ProductsController < ApplicationController
   skip_before_action :require_login, only: [:show]
   before_action :require_manager, only: [:new, :create, :edit, :update, :destroy]
-  before_action :require_item, only: [:show, :edit, :update, :destroy]
+  before_action :require_product, only: [:show, :edit, :update, :destroy]
 
   def show; end
 
   def new
-    @item = Item.new(item_params)
+    @product = Product.new(product_params)
   end
 
   def create
-    @item = Item.new(item_params)
+    @product = Product.new(product_params)
 
-    if @item.save
+    if @product.save
       redirect_to :categories, notice: t(".success")
     else
       render :new, status: :unprocessable_entity
@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   def edit; end
 
   def update
-    if @item.update(item_params)
+    if @product.update(product_params)
       redirect_to :categories, notice: t(".success")
     else
       render :edit, status: :unprocessable_entity
@@ -30,19 +30,19 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
+    @product.destroy
 
     redirect_to :categories, notice: t(".success")
   end
 
   private
 
-  def require_item
-    @item = Item.find(params[:id])
+  def require_product
+    @product = Product.find(params[:id])
   end
 
-  def item_params
-    params.fetch(:item, {}).permit(
+  def product_params
+    params.fetch(:product, {}).permit(
       :category_id,
       :name,
       :price_cents,

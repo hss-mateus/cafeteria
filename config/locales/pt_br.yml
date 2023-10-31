@@ -17,7 +17,7 @@ pt_br:
         password_confirmation: Confirmação de senha
         remember_me: Manter Conectado
 
-      item:
+      product:
         category: Categoria
         category_id: Categoria
         name: Nome
@@ -89,8 +89,8 @@ pt_br:
     destroy:
       success: Categoria removida com sucesso
 
-  items:
-    item:
+  products:
+    product:
       details: Detalhes
     new:
       header: Novo item

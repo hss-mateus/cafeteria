@@ -8,23 +8,23 @@
 #  value_cents :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  item_id     :integer
 #  order_id    :integer          not null
+#  product_id  :integer
 #
 # Indexes
 #
-#  index_order_items_on_item_id               (item_id)
-#  index_order_items_on_order_id              (order_id)
-#  index_order_items_on_order_id_and_item_id  (order_id,item_id) UNIQUE
+#  index_order_items_on_order_id                 (order_id)
+#  index_order_items_on_order_id_and_product_id  (order_id,product_id) UNIQUE
+#  index_order_items_on_product_id               (product_id)
 #
 # Foreign Keys
 #
-#  item_id   (item_id => items.id)
-#  order_id  (order_id => orders.id)
+#  order_id    (order_id => orders.id)
+#  product_id  (product_id => products.id)
 #
 FactoryBot.define do
   factory :order_item do
     order
-    item
+    product
   end
 end

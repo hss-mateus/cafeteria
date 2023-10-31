@@ -4,7 +4,7 @@
       <h2><%= category.name %></h2>
 
       <div class="btn-group" data-controller="role" data-role-required-value="manager">
-        <%= link_to [:new, :item, item: { category_id: category.id }],
+        <%= link_to [:new, :product, product: { category_id: category.id }],
            class: "btn btn-outline-primary btn-sm",
            data: { turbo_frame: :_top } do %>
           <i class="bi bi-plus-lg"></i>
@@ -24,6 +24,6 @@
   <% end %>
 
   <div class="my-3 row">
-    <%= render category.items %>
+    <%= render category.products %>
   </div>
 </div>
