@@ -111,6 +111,7 @@ pt_br:
       header: Menu
       new: Nova Categoria
     create:
+      new: Nova Categoria
       success: Categoria adicionada com sucesso
     update:
       success: Categoria atualizada com sucesso
