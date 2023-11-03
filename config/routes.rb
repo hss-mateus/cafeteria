@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :order_items, only: [:create, :update, :destroy]
+
+  resources :stock_items, except: [:show]
+  resources :stock_movements, except: [:show]
 end

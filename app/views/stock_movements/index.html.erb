@@ -1,0 +1,59 @@
+<div class="d-flex align-items-center gap-3">
+  <h1 class="fw-bold">
+    <%= t(".title") %>
+  </h1>
+
+  <%= link_to t(".new"), [:new, :stock_movement], class: "btn btn-primary" %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        <%= StockMovement.human_attribute_name(:name) %>
+      </th>
+      <th>
+        <%= StockMovement.human_attribute_name(:quantity) %>
+      </th>
+      <th>
+        <%= StockMovement.human_attribute_name(:unit_cost_cents) %>
+      </th>
+      <th>
+        <%= StockMovement.human_attribute_name(:total_cost) %>
+      </th>
+      <th>
+        <%= StockMovement.human_attribute_name(:performed_at) %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movements.each do |movement| %>
+      <tr>
+        <td>
+          <%= movement.name %>
+        </td>
+        <td>
+          <%= human_quantity(movement) %>
+        </td>
+        <td>
+          <%= cents_to_currency(movement.unit_cost_cents) if movement.unit_cost_cents %>
+        </td>
+        <td>
+          <%= number_to_currency(movement.total_cost.to_f) if movement.total_cost %>
+        </td>
+        <td>
+          <%= l(movement.performed_at) %>
+        </td>
+        <td>
+          <%= link_to t(".edit"), [:edit, movement], class: "btn btn-sm btn-primary" %>
+          <%= link_to t(".delete"),
+             movement,
+             class: "btn btn-sm btn-outline-danger",
+             data: { turbo_method: :delete, turbo_confirm: t("delete_confirmation") } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

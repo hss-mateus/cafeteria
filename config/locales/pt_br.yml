@@ -59,6 +59,8 @@ pt_br:
       login: Login
       logout: Logout
 
+  delete_confirmation: Você tem certeza?
+
   static_pages:
     home:
       header: Cafeteria Gourmet
@@ -149,6 +151,40 @@ pt_br:
       message: Em breve levaremos seu pedido até você.
       summary: Resumo
       total: Total
+
+  stock_items:
+    index:
+      title: Estoque - Itens
+      new: Novo
+      edit: Editar
+      delete: Excluir
+    new:
+      title: Novo Item
+    create:
+      success: Item adicionado com sucesso
+    edit:
+      title: Editar Item
+    update:
+      success: Item atualizado com sucesso
+    destroy:
+      success: Item removido com sucesso
+
+  stock_movements:
+    index:
+      title: Estoque - Movimentações
+      new: Nova
+      edit: Editar
+      delete: Excluir
+    new:
+      title: Nova Movimentação
+    create:
+      success: Movimentação adicionada com sucesso
+    edit:
+      title: Editar Movimentação
+    destroy:
+      success: Movimentação removida com sucesso
+    update:
+      success: Movimentação atualizada com sucesso
 
   date:
     abbr_day_names:
@@ -380,7 +416,7 @@ pt_br:
   time:
     am: ''
     formats:
-      default: "%a, %d de %B de %Y, %H:%M:%S %z"
+      default: "%d/%m/%Y - %H:%M"
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''

@@ -1,0 +1,41 @@
+<div class="d-flex align-items-center gap-3">
+  <h1 class="fw-bold">
+    <%= t(".title") %>
+  </h1>
+
+  <%= link_to t(".new"), [:new, :stock_item], class: "btn btn-primary" %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        <%= StockItem.human_attribute_name(:name) %>
+      </th>
+      <th>
+        <%= StockItem.human_attribute_name(:quantity) %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <%= item.name %>
+        </td>
+        <td>
+          <%= human_quantity(item) %>
+        </td>
+        <td>
+          <%= link_to t(".edit"), [:edit, item], class: "btn btn-sm btn-primary" %>
+          <%= link_to t(".delete"),
+             item,
+             class: "btn btn-sm btn-outline-danger",
+             data: { turbo_method: :delete, turbo_confirm: t("delete_confirmation") } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

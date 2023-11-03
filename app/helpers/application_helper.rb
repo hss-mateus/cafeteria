@@ -34,4 +34,14 @@ module ApplicationHelper
       render("shared/flash", type:, message:)
     end
   end
+
+  def human_quantity(record)
+    number = number_with_precision(
+      record.quantity,
+      precision: 2,
+      strip_insignificant_zeros: true
+    )
+
+    "#{number}#{record.unit}"
+  end
 end
