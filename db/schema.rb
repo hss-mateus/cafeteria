@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_31_143805) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_31_174027) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -89,6 +89,27 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_143805) do
     t.index ["name"], name: "index_products_on_name", unique: true
   end
 
+  create_table "stock_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "unit", null: false
+    t.float "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stock_movements", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "name", null: false
+    t.integer "category", default: 0, null: false
+    t.float "quantity", null: false
+    t.string "unit", null: false
+    t.integer "unit_cost_cents"
+    t.datetime "performed_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_stock_movements_on_item_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -113,4 +134,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_31_143805) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "stock_movements", "stock_items", column: "item_id"
 end

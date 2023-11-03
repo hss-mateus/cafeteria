@@ -9,6 +9,8 @@ pt_br:
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
     models:
       user: Usuário
+      stock_item: Item
+      stock_movement: Movimentação
     attributes:
       user:
         name: Nome
@@ -24,6 +26,32 @@ pt_br:
         description: Descrição
         picture: Imagem
         price_cents: Preço
+
+      stock_item:
+        name: Nome
+        quantity: Quantidade
+        unit: Tipo de unidade
+        units:
+          g: grama
+          kg: kilograma
+          un: unidade
+          cm: centímetro
+          m: metro
+          ml: mililitro
+          l: litro
+
+      stock_movement:
+        category: Categoria
+        name: Nome
+        performed_at: Data de execução
+        quantity: Quantidade
+        unit: Tipo de unidade
+        unit_cost_cents: Preço por unidade
+        total_cost: Custo total
+        item: Item
+        categories:
+          inbound: Entrada
+          outbound: Saída
 
   layouts:
     application:
