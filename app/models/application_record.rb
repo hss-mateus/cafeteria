@@ -27,4 +27,12 @@ class ApplicationRecord < ActiveRecord::Base
 
     I18n.t("activerecord.attributes.#{model_name.i18n_key}.#{name}.#{value}")
   end
+
+  def self.ransackable_attributes(_ = nil)
+    authorizable_ransackable_attributes
+  end
+
+  def self.ransackable_associations(_ = nil)
+    authorizable_ransackable_associations
+  end
 end
