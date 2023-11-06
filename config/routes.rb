@@ -16,4 +16,12 @@ Rails.application.routes.draw do
 
   resources :stock_items, except: [:show]
   resources :stock_movements, except: [:show]
+
+  namespace :manager do
+    resources :shifts, only: [:index]
+
+    resources :users, only: [] do
+      resources :shifts, except: [:index, :show], shallow: true
+    end
+  end
 end

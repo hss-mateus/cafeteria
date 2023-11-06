@@ -1,0 +1,5 @@
+<%= turbo_stream.replace [@user, @shift.start_at.to_date] do %>
+  <%= render @shift %>
+<% end %>
+
+<%= update_flash message: t(".success") %>

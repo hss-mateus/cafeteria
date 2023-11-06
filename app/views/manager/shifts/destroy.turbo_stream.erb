@@ -1,0 +1,3 @@
+<%= turbo_stream.remove [@shift.user, @shift.start_at.to_date] %>
+
+<%= update_flash message: t(".success") %>

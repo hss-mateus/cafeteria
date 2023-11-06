@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :modal do %>
+  <div class="modal-header">
+    <h2 class="modal-title fw-bold">
+      <%= @shift.user.name %> - <%= l(@shift.start_at.to_date) %>
+    </h2>
+
+    <button class="btn-close" data-bs-dismiss="modal"></button>
+  </div>
+
+  <div class="modal-body">
+    <%= render "form", shift: @shift, submit_text: t(".submit_text") %>
+  </div>
+<% end %>

@@ -1,0 +1,48 @@
+<h1 class="fw-bold">
+  <%= t(".title") %>
+</h1>
+
+<%= search_form_for @q, url: [:manager, :shifts], class: "d-flex gap-3 align-items-end" do |f| %>
+  <div>
+    <%= f.label :start_at_gteq, Shift.human_attribute_name(:start_at), class: "form-label" %>
+    <%= f.date_field :start_at_gteq, class: "form-control form-control-sm" %>
+  </div>
+
+  <div>
+    <%= f.label :end_at_lteq, Shift.human_attribute_name(:end_at), class: "form-label" %>
+    <%= f.date_field :end_at_lteq, class: "form-control form-control-sm" %>
+  </div>
+
+  <div>
+    <%= f.submit t(".filter"), class: "btn btn-primary btn-sm" %>
+  </div>
+<% end %>
+
+<div class="overflow-x-scroll mt-3">
+  <table class="table table-striped mb-0">
+    <thead>
+      <tr>
+        <th class="position-sticky start-0"></th>
+        <% (@start_at..@end_at).each do |date| %>
+          <th class="text-nowrap text-center border-0">
+            <%= l(date, format: "%a %d/%m") %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% User.employee.each do |user| %>
+        <tr>
+          <th class="position-sticky z-3 start-0 text-nowrap">
+            <%= user.name %>
+          </th>
+
+          <% (@start_at..@end_at).each do |date| %>
+            <%= render @shifts.fetch([user, date], user.shifts.new(start_at: date)) %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

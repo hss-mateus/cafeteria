@@ -55,12 +55,12 @@
     </div>
 
     <div
-      class="modal fade"
+      class="modal"
       tabindex="-1"
       data-controller="modal"
       data-action="turbo:frame-load->modal#open turbo:submit-end->modal#close"
     >
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <%= turbo_frame_tag :modal %>
         </div>

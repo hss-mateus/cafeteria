@@ -26,6 +26,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   has_many :orders, dependent: :destroy
+  has_many :shifts, dependent: :destroy
 
   enum role: {
     customer: 0,
