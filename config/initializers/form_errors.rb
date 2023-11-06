@@ -1,10 +1,13 @@
 class CustomFormBuilder < ActionView::Base::FormBuilder
-  def error_for(attribute)
+  def error_for(attribute, **attrs)
     error_message = @object.errors.full_messages_for(attribute).to_sentence
 
     return if error_message.blank?
 
-    @template.content_tag(:p, error_message, class: "invalid-feedback")
+    attrs[:class] ||= ""
+    attrs[:class] += " invalid-feedback"
+
+    @template.content_tag(:p, error_message, attrs)
   end
 end
 
