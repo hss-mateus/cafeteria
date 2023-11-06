@@ -24,4 +24,8 @@ Rails.application.routes.draw do
       resources :shifts, except: [:index, :show], shallow: true
     end
   end
+
+  namespace :employee do
+    resources :shifts, only: [:index]
+  end
 end

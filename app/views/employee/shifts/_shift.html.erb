@@ -1,0 +1,5 @@
+<td class="text-center dropdown">
+  <span class="badge bg-<%= shift.new_record? ? :success : :info %>">
+    <%= shift.new_record? ? t(".day_off") : shift.human_range %>
+  </span>
+</td>

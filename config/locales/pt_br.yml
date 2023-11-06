@@ -215,6 +215,14 @@ pt_br:
       destroy:
         success: Turno removido com sucesso
 
+  employee:
+    shifts:
+      shift:
+        day_off: Folga
+      index:
+        title: Turnos
+        filter: Filtrar
+
   date:
     abbr_day_names:
     - dom
