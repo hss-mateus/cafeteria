@@ -33,6 +33,14 @@ pt_br:
         picture: Imagem
         price_cents: Preço
 
+      order:
+        statuses:
+          scratch: Pendente
+          payment_started: Pagamento pendente
+          payment_succeeded: Em preparo
+          payment_failed: Erro no pagamento
+          served: Servido
+
       stock_item:
         name: Nome
         quantity: Quantidade
@@ -153,6 +161,13 @@ pt_br:
       title: Pedido
       total: Total
       pay: Pagar
+    status_badge:
+      payment_started_at: Feito em %{time}
+      paid_at: Pago em %{time}
+      served_at: Servido em %{time}
+    index:
+      title: Pedidos
+      order_number: Pedido nº %{number}
 
   payment_results:
     failure: Falha ao processar pagamento, tente novamente.

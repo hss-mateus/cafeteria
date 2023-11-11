@@ -1,0 +1,19 @@
+<h1 class="text-center fw-bold">
+  <%= t(".title") %>
+</h1>
+
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="list-group">
+      <% @orders.each do |order| %>
+        <%= link_to "#", class: "list-group-item list-group-item-action" do %>
+          <div class="fw-bold">
+            <%= t(".order_number", number: order.id) %>
+          </div>
+
+          <%= render "status_badge", order: %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

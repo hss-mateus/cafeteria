@@ -5,6 +5,14 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     @user = login_user
   end
 
+  test "should get index" do
+    create(:order, user: @user)
+
+    get orders_path
+
+    assert_response :success
+  end
+
   test "should get show without an existing order" do
     assert_difference "@user.orders.count" do
       get order_path

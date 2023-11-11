@@ -44,4 +44,14 @@ module ApplicationHelper
 
     "#{number}#{record.unit}"
   end
+
+  def status_class(status)
+    case status.to_s
+    when "scratch" then "secondary"
+    when "payment_started" then "info"
+    when "payment_succeeded" then "info"
+    when "payment_failed" then "danger"
+    when "served" then "success"
+    end
+  end
 end
