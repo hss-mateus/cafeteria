@@ -2,13 +2,16 @@
 #
 # Table name: orders
 #
-#  id                :integer          not null, primary key
-#  observation       :text
-#  status            :integer          default("scratch"), not null
-#  total_value_cents :integer          default(0), not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  user_id           :integer          not null
+#  id                   :integer          not null, primary key
+#  observation          :text
+#  payment_started_at   :datetime
+#  payment_succeeded_at :datetime
+#  served_at            :datetime
+#  status               :integer          default("scratch"), not null
+#  total_value_cents    :integer          default(0), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  user_id              :integer          not null
 #
 # Indexes
 #
@@ -38,7 +41,7 @@ class Order < ApplicationRecord
     served: 4
   }
 
-  aasm column: :status, enum: true, requires_lock: true do
+  aasm column: :status, enum: true, requires_lock: true, timestamps: true do
     state :scratch, initial: true
     state :payment_started,
           :payment_succeeded,
@@ -53,6 +56,10 @@ class Order < ApplicationRecord
     event :handle_payment_result do
       transitions from: :payment_started, to: :payment_succeeded, if: ->(result) { result == "success" }
       transitions from: :payment_started, to: :payment_failed
+    end
+
+    event :serve do
+      transitions from: :payment_succeeded, to: :served
     end
   end
 

@@ -2,13 +2,16 @@
 #
 # Table name: orders
 #
-#  id                :integer          not null, primary key
-#  observation       :text
-#  status            :integer          default("scratch"), not null
-#  total_value_cents :integer          default(0), not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  user_id           :integer          not null
+#  id                   :integer          not null, primary key
+#  observation          :text
+#  payment_started_at   :datetime
+#  payment_succeeded_at :datetime
+#  served_at            :datetime
+#  status               :integer          default("scratch"), not null
+#  total_value_cents    :integer          default(0), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  user_id              :integer          not null
 #
 # Indexes
 #
