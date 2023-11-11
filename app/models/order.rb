@@ -33,6 +33,8 @@ class Order < ApplicationRecord
 
   attribute :session
 
+  after_update_commit :broadcast_replace_later
+
   enum status: {
     scratch: 0,
     payment_started: 1,

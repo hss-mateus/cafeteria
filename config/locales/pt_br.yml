@@ -157,6 +157,9 @@ pt_br:
 
   orders:
     failure: Adicione pelo menos um item para continuar
+    order:
+      title: Pedido nº %{number}
+      total: Total
     current_order:
       title: Pedido
       total: Total
@@ -171,10 +174,7 @@ pt_br:
 
   payment_results:
     show:
-      title: Pedido realizado com sucesso!
-      message: Em breve levaremos seu pedido até você.
-      summary: Resumo
-      total: Total
+      success: Pedido realizado com sucesso! Em breve levaremos seu pedido até você.
       failure: Falha ao processar pagamento, tente novamente.
 
   stock_items:

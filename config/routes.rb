@@ -8,12 +8,13 @@ Rails.application.routes.draw do
   resources :categories, except: [:show]
   resources :products, except: [:index]
 
-  resources :orders, only: [:index]
+  resources :orders, only: [:index, :show]
+
   resource :order, as: :current_order, only: [:show, :update] do
     resource :payment_result, only: [:show]
   end
 
-  resources :order_items, only: [:create, :update, :destroy]
+  resources :order_items, only: [:create, :destroy]
 
   resources :stock_items, except: [:show]
   resources :stock_movements, except: [:show]

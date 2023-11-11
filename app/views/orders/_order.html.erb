@@ -1,33 +1,19 @@
-<div class="row">
+<div id="<%= dom_id(order) %>" class="row">
   <div class="col-xl-6 mx-auto">
-    <div class="alert alert-success d-flex flex-row justify-content-center">
-      <div class="border-end border-success d-flex align-items-center px-3">
-        <i class="bi bi-check-circle-fill h1"></i>
-      </div>
-
-      <div class="ms-3">
-        <h4 class="fw-bold">
-          <%= t(".title") %>
-        </h4>
-
-        <p>
-          <%= t(".message") %>
-        </p>
-      </div>
-    </div>
-
-    <h3 class="fw-bold mb-3 mt-4">
-      <%= t(".summary") %>
+    <h3 class="fw-bold mt-4">
+      <%= t(".title", number: order.id) %>
     </h3>
 
-    <ul class="list-group">
-      <% @order.items.each do |item| %>
+    <%= render "orders/status_badge", order: %>
+
+    <ul class="list-group mt-3">
+      <% order.items.each do |item| %>
         <li class="list-group-item d-flex justify-content-between">
           <div class="d-flex align-items-center gap-2">
             <span class="badge bg-secondary rounded-pill">
               <%= item.quantity %>
             </span>
-            <%= item.item.name %>
+            <%= item.name %>
           </div>
 
           <div>
@@ -42,7 +28,7 @@
         </div>
 
         <div>
-          <%= cents_to_currency(@order.total_value_cents) %>
+          <%= cents_to_currency(order.total_value_cents) %>
         </div>
       </li>
     </ul>

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, except: [:index]
+  before_action :set_order, except: [:index, :show]
   before_action :require_items, only: :update
 
   def index
@@ -7,7 +7,12 @@ class OrdersController < ApplicationController
   end
 
   def show
+    if (id = params[:id])
+      @order = current_user.orders.find(id)
+    else
+      set_order
       render "current_order"
+    end
   end
 
   def update

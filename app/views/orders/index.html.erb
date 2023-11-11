@@ -6,7 +6,7 @@
   <div class="col-lg-6">
     <div class="list-group">
       <% @orders.each do |order| %>
-        <%= link_to "#", class: "list-group-item list-group-item-action" do %>
+        <%= link_to order, class: "list-group-item list-group-item-action" do %>
           <div class="fw-bold">
             <%= t(".order_number", number: order.id) %>
           </div>

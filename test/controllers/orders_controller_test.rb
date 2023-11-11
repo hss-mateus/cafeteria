@@ -13,6 +13,14 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get show with id provided" do
+    order = create(:order, user: @user)
+
+    get order_path(order)
+
+    assert_response :success
+  end
+
   test "should get show without an existing order" do
     assert_difference "@user.orders.count" do
       get current_order_path

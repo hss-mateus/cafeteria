@@ -10,7 +10,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
     get current_order_payment_result_path(token: order.payment_token, status: :success)
 
-    assert_response :success
+    assert_redirected_to order
   end
 
   test "should not get show without an payment started order" do
