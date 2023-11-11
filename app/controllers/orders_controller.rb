@@ -2,11 +2,13 @@ class OrdersController < ApplicationController
   before_action :set_order, except: [:index]
   before_action :require_items, only: :update
 
-  def show; end
   def index
     @orders = current_user.orders.where.not(status: :scratch)
   end
 
+  def show
+      render "current_order"
+  end
 
   def update
     @order.start_payment!
@@ -23,6 +25,6 @@ class OrdersController < ApplicationController
   def require_items
     return if @order.items.any?
 
-    redirect_to :order, alert: t(".failure")
+    redirect_to :current_order, alert: t(".failure")
   end
 end

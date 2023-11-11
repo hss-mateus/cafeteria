@@ -76,8 +76,8 @@ class Order < ApplicationRecord
   def create_session
     self.session = Stripe::Checkout::Session.create({
       mode: "payment",
-      success_url: order_payment_result_url(status: :success, token: payment_token),
-      cancel_url: order_payment_result_url(status: :failed, token: payment_token),
+      success_url: current_order_payment_result_url(status: :success, token: payment_token),
+      cancel_url: current_order_payment_result_url(status: :failed, token: payment_token),
       line_items: items.map { |item|
         {
           quantity: item.quantity,

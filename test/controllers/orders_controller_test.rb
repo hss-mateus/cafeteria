@@ -15,7 +15,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
   test "should get show without an existing order" do
     assert_difference "@user.orders.count" do
-      get order_path
+      get current_order_path
     end
 
     assert_response :success
@@ -25,7 +25,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     create(:order, user: @user, status: :scratch)
 
     assert_no_difference "@user.orders.count" do
-      get order_path
+      get current_order_path
     end
 
     assert_response :success
@@ -35,7 +35,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     create(:order, user: @user, status: :served)
 
     assert_difference "@user.orders.count" do
-      get order_path
+      get current_order_path
     end
 
     assert_response :success
@@ -45,7 +45,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     order = create(:order, user: @user, items: [build(:order_item)])
 
     assert_changes "order.reload.status", from: "scratch", to: "payment_started" do
-      put order_path
+      put current_order_path
     end
 
     assert_redirected_to %r{https://checkout.stripe.com}
@@ -55,9 +55,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     order = create(:order, user: @user)
 
     assert_no_changes "order.reload.status" do
-      put order_path
+      put current_order_path
     end
 
-    assert_redirected_to :order
+    assert_redirected_to :current_order
   end
 end

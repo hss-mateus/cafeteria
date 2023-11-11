@@ -10,7 +10,7 @@ class OrderItemsController < ApplicationController
 
     @order.calculate_total_value!
 
-    redirect_to :order
+    redirect_to :current_order
   end
 
   def destroy
@@ -20,7 +20,7 @@ class OrderItemsController < ApplicationController
 
     @order.calculate_total_value!
 
-    redirect_to :order
+    redirect_to :current_order
   end
 
   def set_order

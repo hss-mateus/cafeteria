@@ -7,5 +7,6 @@ class PaymentResultsController < ApplicationController
 
     @order.scratch!
     redirect_to :order, alert: t(".failure")
+      redirect_to :current_order, alert: t(".failure")
   end
 end

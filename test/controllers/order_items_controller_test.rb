@@ -12,7 +12,7 @@ class OrderItemsControllerTest < ActionDispatch::IntegrationTest
       post order_items_path, params: { product_id: create(:product).id }
     end
 
-    assert_redirected_to :order
+    assert_redirected_to :current_order
   end
 
   test "should increase item quantity if already added" do
@@ -23,7 +23,7 @@ class OrderItemsControllerTest < ActionDispatch::IntegrationTest
       post order_items_path, params: { product_id: item.product_id }
     end
 
-    assert_redirected_to :order
+    assert_redirected_to :current_order
   end
 
   test "should update order total value" do
@@ -34,7 +34,7 @@ class OrderItemsControllerTest < ActionDispatch::IntegrationTest
       post order_items_path, params: { product_id: product.id }
     end
 
-    assert_redirected_to :order
+    assert_redirected_to :current_order
   end
 
   test "should remove item from order" do
@@ -45,7 +45,7 @@ class OrderItemsControllerTest < ActionDispatch::IntegrationTest
       delete order_item_path(item)
     end
 
-    assert_redirected_to :order
+    assert_redirected_to :current_order
   end
 
   test "should decrease quantity if quantity is more than one" do
@@ -56,6 +56,6 @@ class OrderItemsControllerTest < ActionDispatch::IntegrationTest
       delete order_item_path(item)
     end
 
-    assert_redirected_to :order
+    assert_redirected_to :current_order
   end
 end
