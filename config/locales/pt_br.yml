@@ -243,6 +243,20 @@ pt_br:
         title: Turnos
         filter: Filtrar
 
+  table_reservations:
+    index:
+      title: Reservas
+      new: Nova
+      reservation_number: Reserva nº %{number}
+      date: "Data: %{date}"
+      table: "Mesa: %{number}"
+    new:
+      title: Nova Reserva
+    create:
+      success: Mesa reservada com sucesso
+    destroy:
+      success: Reserva cancelada com sucesso
+
   date:
     abbr_day_names:
     - dom

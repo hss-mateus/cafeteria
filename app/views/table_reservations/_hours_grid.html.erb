@@ -1,0 +1,36 @@
+<% week_range, reservation_groups = TableReservation.week_range_reservation_groups %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <% week_range.each do |date| %>
+        <th class="text-center">
+          <%= l(date, format: "%A %d/%m") %>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% TableReservation.permitted_hours.each.with_index do |hour, hour_index| %>
+      <tr class="text-center">
+        <th>
+          <%= l(hour.hours.since(Time.zone.today), format: "%H:%M") %>
+        </th>
+
+        <% week_range.each do |date| %>
+          <td>
+            <% if (date.at_beginning_of_day + hour.hours).past? %>
+              -
+            <% elsif (tables = TableReservation.available_tables(reservation_groups, date, hour)) %>
+              <%= render "table_reservations/form", model:, tables:, date:, hour_index: %>
+            <% else %>
+              Lotado
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

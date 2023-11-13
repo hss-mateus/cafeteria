@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   namespace :employee do
     resources :shifts, only: [:index]
   end
+
+  resources :table_reservations, only: [:index, :new, :create, :destroy]
 end

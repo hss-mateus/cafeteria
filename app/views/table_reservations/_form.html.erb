@@ -1,0 +1,37 @@
+<div data-controller="table-reservation">
+  <template data-table-reservation-target="button">
+    <button class="btn btn-outline-success btn-sm" data-action="table-reservation#showForm">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </template>
+
+  <template data-table-reservation-target="form">
+    <%= form_with model: do |f| %>
+      <%= f.hidden_field :date, value: date %>
+      <%= f.hidden_field :hour_index, value: hour_index %>
+
+      <div class="input-group">
+        <div class="input-group-text">
+          <%= TableReservation.human_attribute_name(:table_number) %>
+        </div>
+
+        <%= f.collection_select :table_number,
+           tables,
+           :itself,
+           :itself,
+           {},
+           class: "form-select form-control-sm" %>
+
+        <%= f.button nil, class: "btn btn-outline-success btn-sm" do %>
+          <i class="bi bi-check-lg"></i>
+        <% end %>
+
+        <%= f.button nil, class: "btn btn-outline-danger btn-sm", type: :button, data: { action: "table-reservation#showButton" } do %>
+          <i class="bi bi-x-lg"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </template>
+
+  <div data-table-reservation-target="container"></div>
+</div>

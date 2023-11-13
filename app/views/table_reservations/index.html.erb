@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="d-flex align-items-center gap-3">
+      <h1 class="fw-bold">
+        <%= t(".title") %>
+      </h1>
+
+      <%= link_to t(".new"), [:new, :table_reservation], class: "btn btn-primary" %>
+    </div>
+
+    <div class="list-group">
+      <% @reservations.each do |reservation| %>
+        <div class="list-group-item d-flex flex-column">
+          <div class="d-flex justify-content-between">
+            <div class="fw-bold">
+              <%= t(".reservation_number", number: reservation.id) %>
+            </div>
+
+            <%= link_to reservation,
+                  class: "btn btn-sm btn-outline-danger",
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: t("delete_confirmation")
+                  } do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </div>
+
+          <div>
+            <%= t(".date", date: l(reservation.date, format: "%d/%m %H:%M")) %>
+          </div>
+
+          <div>
+            <%= t(".table", number: reservation.table_number) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
