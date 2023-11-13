@@ -27,6 +27,7 @@ class User < ApplicationRecord
 
   has_many :orders, dependent: :destroy
   has_many :shifts, dependent: :destroy
+  has_many :table_reservations, dependent: :destroy
 
   enum role: {
     customer: 0,

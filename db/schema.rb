@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_08_201744) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_11_222201) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -122,6 +122,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_201744) do
     t.index ["item_id"], name: "index_stock_movements_on_item_id"
   end
 
+  create_table "table_reservations", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.integer "user_id", null: false
+    t.integer "table_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date", "table_number"], name: "index_table_reservations_on_date_and_table_number", unique: true
+    t.index ["user_id"], name: "index_table_reservations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -148,4 +158,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_201744) do
   add_foreign_key "products", "categories"
   add_foreign_key "shifts", "users"
   add_foreign_key "stock_movements", "stock_items", column: "item_id"
+  add_foreign_key "table_reservations", "users"
 end

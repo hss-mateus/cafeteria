@@ -13,6 +13,8 @@ pt_br:
           date_order: precisa estar antes do término
           unique_date: já está ocupado
           duration: não pode ultrapassar 12h de duração
+        table_reservation:
+          date_in_future: não está mais disponível
     models:
       user: Usuário
       stock_item: Item
@@ -70,6 +72,9 @@ pt_br:
       shift:
         start_at: Início
         end_at: Término
+
+      table_reservation:
+        table_number: Mesa
 
   layouts:
     application:
