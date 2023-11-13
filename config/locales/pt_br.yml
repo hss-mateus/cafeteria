@@ -243,6 +243,19 @@ pt_br:
         title: Turnos
         filter: Filtrar
 
+    table_reservations:
+      index:
+        title: Reservas
+        reservation_number: Reserva nº %{number}
+        date: "Data: %{date}"
+        table: "Mesa: %{number}"
+      edit:
+        title: Editar reserva nº %{number}
+      update:
+        success: Reserva atualizada com sucesso
+      destroy:
+        success: Reserva cancelada com sucesso
+
   table_reservations:
     index:
       title: Reservas

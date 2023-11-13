@@ -1,0 +1,5 @@
+<h1 class="fw-bold">
+  <%= t(".title", number: @reservation.id) %>
+</h1>
+
+<%= render "table_reservations/hours_grid", model: [:employee, @reservation] %>
