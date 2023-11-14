@@ -1,0 +1,22 @@
+<h1 class="fw-bold mb-4">Estatísticas</h1>
+
+<div class="row g-5">
+  <div class="col-6">
+    <h4 class="fw-bold">Faturamento mensal</h4>
+
+    <%= line_chart @sales_amount, prefix: t("number.currency.format.unit") %>
+  </div>
+
+  <div class="col-6">
+    <h4 class="fw-bold">Vendas mensais</h4>
+
+    <%= line_chart @sales_count %>
+  </div>
+
+  <div class="col-6">
+    <h4 class="fw-bold d-inline me-2">Produtos mais vendidos</h4>
+    <small class="text-muted">Últimos 12 meses</small>
+
+    <%= bar_chart @most_sold_products %>
+  </div>
+</div>

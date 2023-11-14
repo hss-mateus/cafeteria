@@ -23,6 +23,11 @@
 #
 FactoryBot.define do
   factory :order do
-    user
+    association :user, role: :customer
+    payment_started_at { rand(1..365).days.ago }
+    payment_succeeded_at { payment_started_at + 1.minute }
+    served_at { payment_succeeded_at + 15.minutes }
+    status { :served }
+    total_value_cents { rand(1000..20000) }
   end
 end
