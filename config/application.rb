@@ -33,5 +33,13 @@ module Cafeteria
     config.autoload_lib(ignore: ["assets", "tasks"])
 
     Stripe.api_key = Rails.application.credentials.stripe.api_key
+
+    Groupdate.register_adapter "litedb", Groupdate::Adapters::SQLiteAdapter
+    Groupdate.time_zone = "UTC"
+
+    Chartkick.options = {
+      thousands: I18n.t("number.format.separator"),
+      decimal: I18n.t("number.format.delimiter")
+    }
   end
 end

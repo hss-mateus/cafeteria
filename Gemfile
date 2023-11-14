@@ -20,6 +20,8 @@ gem "after_commit_everywhere"
 gem "sorcery"
 gem "litestack"
 gem "stripe"
+gem "chartkick"
+gem "groupdate"
 
 group :development do
   gem "web-console"

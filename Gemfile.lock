@@ -93,6 +93,7 @@ GEM
     bigdecimal (3.1.4)
     bindex (0.8.1)
     builder (3.2.4)
+    chartkick (5.0.4)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -118,6 +119,8 @@ GEM
     faraday-net_http (3.0.2)
     ffi (1.16.3)
     globalid (1.2.1)
+      activesupport (>= 6.1)
+    groupdate (6.4.0)
       activesupport (>= 6.1)
     hanami-router (2.0.2)
       mustermann (~> 3.0)
@@ -298,9 +301,11 @@ DEPENDENCIES
   after_commit_everywhere
   annotate
   ar_lazy_preload
+  chartkick
   cssbundling-rails
   debug
   factory_bot_rails
+  groupdate
   image_processing
   jsbundling-rails
   litestack
