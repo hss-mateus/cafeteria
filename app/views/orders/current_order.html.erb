@@ -18,7 +18,7 @@
 
                 <input type="text" size="1" class="form-control text-center bg-light" value="<%= item.quantity %>" disabled>
 
-                <%= link_to "+", [:items, item_id: item.item_id], class: "btn btn-outline-secondary", data: { turbo_method: :post } %>
+                <%= link_to "+", [:order_items, product_id: item.product_id], class: "btn btn-outline-secondary", data: { turbo_method: :post } %>
               </div>
             </div>
 
