@@ -179,7 +179,7 @@ pt_br:
 
   payment_results:
     show:
-      success: Pedido realizado com sucesso! Em breve levaremos seu pedido até você.
+      success: Pedido realizado! Não se esqueça de deixar sua avaliação mais tarde.
       failure: Falha ao processar pagamento, tente novamente.
 
   stock_items:

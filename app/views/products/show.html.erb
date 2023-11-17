@@ -1,8 +1,15 @@
 <%= turbo_frame_tag :modal do %>
   <div class="modal-header">
-    <h1 class="modal-title fw-bold">
-      <%= @product.name %>
-    </h1>
+      <h1 class="modal-title fw-bold me-3">
+        <%= @product.name %>
+      </h1>
+
+      <% if @product.rating.positive? %>
+        <div class="badge bg-warning text-dark border border-dark">
+          <small><%= number_with_precision(@product.rating, precision: 1) %></small>
+          <i class="bi bi-star"></i>
+        </div>
+      <% end %>
 
     <%= button_to t(".add", value: cents_to_currency(@product.price_cents)),
        :order_items,

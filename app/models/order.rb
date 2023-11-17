@@ -28,6 +28,7 @@ class Order < ApplicationRecord
   belongs_to :user
 
   has_many :items, dependent: :destroy, class_name: "OrderItem"
+  has_many :products, through: :items
 
   accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
 
@@ -42,6 +43,8 @@ class Order < ApplicationRecord
     payment_failed: 3,
     served: 4
   }
+
+  scope :confirmed, -> { where(status: [:payment_succeeded, :served]) }
 
   aasm column: :status, enum: true, requires_lock: true, timestamps: true do
     state :scratch, initial: true

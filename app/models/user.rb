@@ -26,6 +26,7 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   has_many :orders, dependent: :destroy
+  has_many :confirmed_orders, -> { confirmed }, class_name: "Order", dependent: :destroy, inverse_of: :user
   has_many :shifts, dependent: :destroy
   has_many :table_reservations, dependent: :destroy
   has_many :ratings, dependent: :destroy

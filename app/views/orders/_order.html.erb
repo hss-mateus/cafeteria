@@ -7,17 +7,31 @@
     <%= render "orders/status_badge", order: %>
 
     <ul class="list-group mt-3">
+      <% ratings = order.user.ratings.where(product: order.products).index_by(&:product_id) %>
       <% order.items.each do |item| %>
-        <li class="list-group-item d-flex justify-content-between">
-          <div class="d-flex align-items-center gap-2">
-            <span class="badge bg-secondary rounded-pill">
-              <%= item.quantity %>
-            </span>
-            <%= item.name %>
-          </div>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-7">
+              <span class="badge bg-secondary rounded-pill">
+                <%= item.quantity %>
+              </span>
 
-          <div>
-            <%= cents_to_currency(item.value_cents) %>
+              <%= item.name %>
+            </div>
+
+            <div class="col text-nowrap" data-controller="rating" data-rating-star-count-value="<%= ratings[item.product_id]&.value %>">
+              <% (1..5).each do |i| %>
+                <%= link_to [:product, :ratings, product_id: item.product_id, order_id: order.id, rating: { value: i }],
+                   class: "text-decoration-none",
+                   data: { turbo_method: :post } do %>
+                  <i class="bi bi-star<%= '-fill' if ratings[item.product_id]&.value&.>=(i) %> text-warning"></i>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="col text-nowrap text-end">
+              <%= cents_to_currency(item.value_cents * 100) %>
+            </div>
           </div>
         </li>
       <% end %>

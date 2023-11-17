@@ -8,8 +8,10 @@ import MaskController from "./mask_controller"
 import RoleController from "./role_controller"
 import ModalController from "./modal_controller"
 import TableReservationController from "./table_reservation_controller"
+import RatingController from "./rating_controller"
 
 application.register("mask", MaskController)
 application.register("role", RoleController)
 application.register("modal", ModalController)
 application.register("table-reservation", TableReservationController)
+application.register("rating", RatingController)
