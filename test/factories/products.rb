@@ -5,6 +5,7 @@
 #  id          :integer          not null, primary key
 #  name        :string           not null
 #  price_cents :integer          not null
+#  rating      :float            default(0.0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :integer          not null

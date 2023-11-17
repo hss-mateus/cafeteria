@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_11_222201) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_17_200250) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -88,8 +88,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_11_222201) do
     t.integer "price_cents", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "rating", default: 0.0, null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["name"], name: "index_products_on_name", unique: true
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.integer "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_ratings_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_ratings_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "shifts", force: :cascade do |t|
@@ -156,6 +168,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_11_222201) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "ratings", "products"
+  add_foreign_key "ratings", "users"
   add_foreign_key "shifts", "users"
   add_foreign_key "stock_movements", "stock_items", column: "item_id"
   add_foreign_key "table_reservations", "users"

@@ -5,6 +5,7 @@
 #  id          :integer          not null, primary key
 #  name        :string           not null
 #  price_cents :integer          not null
+#  rating      :float            default(0.0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :integer          not null
@@ -21,7 +22,8 @@
 class Product < ApplicationRecord
   belongs_to :category
 
-  has_many :order_items
+  has_many :order_items, dependent: :nullify
+  has_many :ratings, dependent: :destroy
 
   has_rich_text :description
 
