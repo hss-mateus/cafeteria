@@ -1,0 +1,6 @@
+<div
+  data-controller="message <%= :focus if local_assigns[:focus] %>"
+  data-message-user-value="<%= message.sender_id %>"
+  class="border rounded px-2 py-1">
+  <%= message.content %>
+</div>

@@ -256,6 +256,11 @@ pt_br:
       destroy:
         success: Reserva cancelada com sucesso
 
+    users:
+      index:
+        title: Chat
+        select: Selecione uma conversa ao lado
+
   table_reservations:
     index:
       title: Reservas

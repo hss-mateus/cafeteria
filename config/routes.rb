@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   namespace :employee do
     resources :shifts, only: [:index]
     resources :table_reservations, only: [:index, :edit, :update, :destroy]
+
+    resources :users, only: [:index] do
+      resources :messages, only: [:index, :create]
+    end
   end
 
   resources :table_reservations, only: [:index, :new, :create, :destroy]

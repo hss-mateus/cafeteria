@@ -1,0 +1,36 @@
+<%= provide(:title, t(".title")) %>
+
+<%= turbo_stream_from [current_user, :chats] %>
+
+<div class="row h-100">
+  <div class="col-3">
+    <ul class="nav flex-column nav-pills nav-fill" data-controller="user-list">
+      <% @users.each do |user| %>
+        <li class="nav-item" id="<%= dom_id(user) %>" data-user-list-target="user">
+          <%= link_to [:employee, user, :messages],
+             class: "nav-link border-bottom d-flex align-items-center justify-content-between",
+             data: { turbo_frame: :chat } do %>
+            <span>
+              <%= user.name %>
+            </span>
+
+            <span class="unread-badge badge bg-primary rounded-pill p-2 d-none">
+            </span>
+
+            <% if @unread_chats.include?(user.id) %>
+              <%= turbo_stream.invoke :dispatch_event, args: ["new-message"], selector: "##{dom_id(user)}" %>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-9">
+    <%= turbo_frame_tag :chat, class: "d-block border rounded", style: "height: calc(100vh - 56px - 3rem)" do %>
+      <div class="p-3 w-100 text-center">
+        <%= t(".select") %>
+      </div>
+    <% end %>
+  </div>
+</div>

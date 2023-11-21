@@ -1,0 +1,37 @@
+<%= turbo_frame_tag :chat do %>
+  <%= turbo_stream_from Message.channel(current_user, @user) %>
+
+  <div class="d-flex h-100 flex-column">
+    <%= turbo_frame_tag :messages, class: "h-100 p-3 overflow-auto" do %>
+      <% if @pagy.next %>
+        <%= turbo_frame_tag :messages,
+           src: { page: @pagy.next, last: @messages.first.id },
+           loading: :lazy %>
+      <% end %>
+
+      <div class="d-flex flex-column">
+        <%= render collection: @messages.reverse, partial: "messages/message" %>
+
+        <span data-controller="focus"></span>
+
+        <% if @pagy.page == 1 %>
+          <span id="bottom"></span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_with model: [:employee, @user, Message.new], id: "message-form" do |f| %>
+      <div class="input-group">
+        <%= f.text_field :content, autofocus: true, class: "form-control border-bottom-0 border-start-0" %>
+
+        <button class="btn btn-primary">
+          <i class="bi bi-send"></i>
+        </button>
+      </div>
+    <% end %>
+  </div>
+
+  <%= turbo_stream.invoke :set_attribute,
+     args: ["data-user-list-selected-value", dom_id(@user)],
+     selector: "[data-controller='user-list']" %>
+<% end %>
