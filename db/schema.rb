@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_17_200250) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_19_191431) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -54,6 +54,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_17_200250) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content", null: false
+    t.integer "sender_id", null: false
+    t.string "recipient_type", null: false
+    t.integer "recipient_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_type", "recipient_id"], name: "index_messages_on_recipient"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -164,6 +176,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_17_200250) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"

@@ -31,6 +31,9 @@ class User < ApplicationRecord
   has_many :table_reservations, dependent: :destroy
   has_many :ratings, dependent: :destroy
 
+  has_many :sent_messages, class_name: "Message", dependent: :nullify, foreign_key: :sender_id, inverse_of: :sender
+  has_many :received_messages, class_name: "Message", as: :recipient, dependent: :nullify
+
   enum role: {
     customer: 0,
     employee: 1,
