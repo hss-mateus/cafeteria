@@ -24,6 +24,9 @@ class Product < ApplicationRecord
 
   has_many :order_items, dependent: :nullify
   has_many :ratings, dependent: :destroy
+  has_many :alergenic_ingredients, dependent: :destroy
+
+  accepts_nested_attributes_for :alergenic_ingredients, reject_if: :all_blank, allow_destroy: true
 
   has_rich_text :description
 

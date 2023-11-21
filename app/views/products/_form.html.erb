@@ -28,5 +28,28 @@
     <%= f.error_for :price_cents %>
   </div>
 
+  <div data-controller="nested-fields" class="mt-4">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <h4 class="m-0">Ingredientes Alergênicos</h4>
+
+      <button type="button" data-action="nested-fields#add" class="btn btn-sm btn-outline-primary">
+        <i class="bi bi-plus"></i>
+      </button>
+    </div>
+
+    <template data-nested-fields-target="template">
+      <%= f.fields_for :alergenic_ingredients, AlergenicIngredient.new, child_index: "NEW_RECORD" do |af| %>
+        <%= render "alergenic_ingredient_fields", f: af %>
+      <% end %>
+    </template>
+
+    <div data-nested-fields-target="container" class="row">
+      <%= f.fields_for :alergenic_ingredients do |af| %>
+        <%= render "alergenic_ingredient_fields", f: af %>
+      <% end %>
+    </div>
+
+  </div>
+
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

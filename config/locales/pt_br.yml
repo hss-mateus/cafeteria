@@ -19,6 +19,7 @@ pt_br:
       user: Usuário
       stock_item: Item
       stock_movement: Movimentação
+      product: Produto
     attributes:
       user:
         name: Nome
@@ -34,6 +35,9 @@ pt_br:
         description: Descrição
         picture: Imagem
         price_cents: Preço
+
+      alergenic_ingredient:
+        name: Nome
 
       order:
         statuses:
@@ -147,18 +151,19 @@ pt_br:
     product:
       details: Detalhes
     new:
-      header: Novo item
+      header: Novo produto
     edit:
-      header: Editar item
+      header: Editar produto
     create:
-      success: Item criado com sucesso
+      success: Produto criado com sucesso
     update:
-      success: Item atualizado com sucesso
+      success: Produto atualizado com sucesso
     show:
       add: Adicionar - %{value}
       delete_confirm: Você tem certeza?
+      alergenic_information: "Alérgicos: Contém %{ingredients}"
     destroy:
-      success: Item removido com sucesso
+      success: Produto removido com sucesso
 
   orders:
     failure: Adicione pelo menos um item para continuar

@@ -47,7 +47,12 @@ class ProductsController < ApplicationController
       :name,
       :price_cents,
       :description,
-      :picture
+      :picture,
+      alergenic_ingredients_attributes: [
+        :id,
+        :_destroy,
+        :name
+      ]
     )
   end
 end

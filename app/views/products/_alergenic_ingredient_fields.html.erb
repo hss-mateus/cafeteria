@@ -1,0 +1,14 @@
+<div class="col-3 mb-3 nested-field-wrapper">
+  <%= f.label :name, class: "form-label" %>
+
+  <div class="input-group">
+    <%= f.text_field :name, class: "form-control" %>
+    <button type="button" data-action="nested-fields#remove" class="btn btn-outline-danger">
+      <i class="bi bi-trash-fill"></i>
+    </button>
+  </div>
+
+  <%= f.error_for :name, class: "d-block" %>
+
+  <%= f.hidden_field :_destroy %>
+</div>

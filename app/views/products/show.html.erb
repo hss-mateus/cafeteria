@@ -42,5 +42,13 @@
     <div>
       <%= @product.description %>
     </div>
+
+    <% if (ingredients = @product.alergenic_ingredients.pluck(:name).to_sentence).present? %>
+      <hr />
+
+      <div>
+        <%= t(".alergenic_information", ingredients:) %>
+      </div>
+    <% end %>
   </div>
 <% end %>
