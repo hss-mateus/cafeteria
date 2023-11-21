@@ -22,6 +22,7 @@ gem "litestack"
 gem "stripe"
 gem "chartkick"
 gem "groupdate"
+gem "turbo_boost-streams"
 
 group :development do
   gem "web-console"

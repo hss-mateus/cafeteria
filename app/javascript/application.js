@@ -1,5 +1,6 @@
 import "./controllers"
 import "@hotwired/turbo-rails"
+import "@turbo-boost/streams"
 import * as bootstrap from "bootstrap"
 import "trix"
 import "@rails/actiontext"
