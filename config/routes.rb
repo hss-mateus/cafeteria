@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   namespace :manager do
     resources :shifts, only: [:index]
     resources :statistics, only: [:index]
+    resources :sales, except: [:show]
 
     resources :users, only: [] do
       resources :shifts, except: [:index, :show], shallow: true

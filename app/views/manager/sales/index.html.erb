@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="d-flex align-items-center gap-3">
+      <h1 class="fw-bold">
+        <%= t(".title") %>
+      </h1>
+
+      <%= link_to t(".new"), [:new, :manager, :sale], class: "btn btn-primary" %>
+    </div>
+
+    <div class="list-group">
+      <% @sales.each do |sale| %>
+        <div class="list-group-item d-flex flex-column <%= :disabled unless sale.active? %>">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+              <span class="h4 m-0">
+                <%= sale.product.name %>
+              </span>
+
+              <span class="badge bg-<%= sale.active? ? :success : :secondary %>">
+                <%= cents_to_currency(-sale.discount_cents) %>
+              </span>
+            </div>
+
+            <% if sale.active? %>
+              <div class="btn-group">
+                <%= link_to [:edit, :manager, sale], class: "btn btn-outline-primary btn-sm" do %>
+                  <i class="bi bi-pencil"></i>
+                <% end %>
+
+                <%= link_to [:manager, sale],
+                   class: "btn btn-sm btn-outline-danger",
+                   data: {
+                     turbo_method: :delete,
+                     turbo_confirm: t("delete_confirmation")
+                   } do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
