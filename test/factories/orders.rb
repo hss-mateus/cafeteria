@@ -3,12 +3,14 @@
 # Table name: orders
 #
 #  id                   :integer          not null, primary key
+#  discount_cents       :integer          default(0), not null
+#  gross_value_cents    :integer          default(0), not null
+#  liquid_value_cents   :integer          default(0), not null
 #  observation          :text
 #  payment_started_at   :datetime
 #  payment_succeeded_at :datetime
 #  served_at            :datetime
 #  status               :integer          default("scratch"), not null
-#  total_value_cents    :integer          default(0), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  user_id              :integer          not null
@@ -28,6 +30,6 @@ FactoryBot.define do
     payment_succeeded_at { payment_started_at + 1.minute }
     served_at { payment_succeeded_at + 15.minutes }
     status { :served }
-    total_value_cents { rand(1000..20000) }
+    liquid_value_cents { rand(1000..20000) }
   end
 end

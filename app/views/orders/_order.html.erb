@@ -11,7 +11,7 @@
       <% order.items.each do |item| %>
         <li class="list-group-item">
           <div class="row">
-            <div class="col-7">
+            <div class="col-6">
               <span class="badge bg-secondary rounded-pill">
                 <%= item.quantity %>
               </span>
@@ -30,7 +30,17 @@
             </div>
 
             <div class="col text-nowrap text-end">
-              <%= cents_to_currency(item.value_cents * 100) %>
+              <% if item.discount? %>
+                <s class="text-muted">
+                  <%= cents_to_currency(item.gross_value_cents) %>
+                </s>
+
+                <b>
+                  <%= cents_to_currency(item.liquid_value_cents) %>
+                </b>
+              <% else %>
+                <%= cents_to_currency(item.liquid_value_cents) %>
+              <% end %>
             </div>
           </div>
         </li>
@@ -42,7 +52,7 @@
         </div>
 
         <div>
-          <%= cents_to_currency(order.total_value_cents) %>
+          <%= cents_to_currency(order.liquid_value_cents) %>
         </div>
       </li>
     </ul>

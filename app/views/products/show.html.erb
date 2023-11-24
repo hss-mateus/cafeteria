@@ -11,11 +11,24 @@
         </div>
       <% end %>
 
-    <%= button_to t(".add", value: cents_to_currency(@product.price_cents)),
-       :order_items,
+    <%= button_to :order_items,
        params: { product_id: @product.id },
        class: "btn btn-primary ms-3",
-       form: { data: { turbo_frame: :_top } } %>
+       form: { data: { turbo_frame: :_top } } do %>
+      <%= t(".add") %>
+
+      <% if @product.discount? %>
+        <s class="text-light">
+          <%= cents_to_currency(@product.price_cents) %>
+        </s>
+
+        <b>
+          <%= cents_to_currency(@product.discounted_price_cents) %>
+        </b>
+      <% else %>
+        <%= cents_to_currency(@product.price_cents) %>
+      <% end %>
+    <% end %>
 
     <div class="btn-group" data-controller="role" data-role-required-value="manager">
       <%= link_to [:edit, @product], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>

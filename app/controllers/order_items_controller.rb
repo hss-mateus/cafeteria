@@ -8,7 +8,7 @@ class OrderItemsController < ApplicationController
 
     item.increment(:quantity).save unless item.saved_changes?
 
-    @order.calculate_total_value!
+    @order.calculate_values!
 
     redirect_to :current_order
   end
@@ -18,7 +18,7 @@ class OrderItemsController < ApplicationController
     item.decrement(:quantity).save
     item.destroy if item.quantity.zero?
 
-    @order.calculate_total_value!
+    @order.calculate_values!
 
     redirect_to :current_order
   end

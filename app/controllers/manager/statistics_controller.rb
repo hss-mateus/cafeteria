@@ -9,7 +9,7 @@ class Manager::StatisticsController < Manager::ApplicationController
     @sales_amount = Order
       .served
       .group_by_month(:served_at, last: 12)
-      .sum(:total_value_cents)
+      .sum(:liquid_value_cents)
       .transform_keys { I18n.l(_1, format: "%b %y") }
       .transform_values { Money.to_value(_1) }
 

@@ -13,7 +13,17 @@
           <% end %>
 
           <p class="card-text mt-2">
-            <%= cents_to_currency(product.price_cents) %>
+            <% if product.discount? %>
+              <s class="text-muted">
+                <%= cents_to_currency(product.price_cents) %>
+              </s>
+
+              <b>
+                <%= cents_to_currency(product.discounted_price_cents) %>
+              </b>
+            <% else %>
+              <%= cents_to_currency(product.price_cents) %>
+            <% end %>
           </p>
 
           <%= link_to product,

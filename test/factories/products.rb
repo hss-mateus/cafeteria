@@ -23,6 +23,6 @@ FactoryBot.define do
   factory :product do
     category
     sequence(:name) { "Product ##{_1}" }
-    price_cents { 1_00 }
+    price_cents { 100_00 }
   end
 end

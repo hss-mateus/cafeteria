@@ -2,14 +2,16 @@
 #
 # Table name: order_items
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  quantity    :integer          default(1), not null
-#  value_cents :integer          not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  order_id    :integer          not null
-#  product_id  :integer
+#  id                 :integer          not null, primary key
+#  discount_cents     :integer          default(0), not null
+#  gross_value_cents  :integer          default(0), not null
+#  liquid_value_cents :integer          not null
+#  name               :string           not null
+#  quantity           :integer          default(1), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  order_id           :integer          not null
+#  product_id         :integer
 #
 # Indexes
 #

@@ -23,7 +23,17 @@
             </div>
 
             <div class="col-2 text-end">
-              <%= cents_to_currency(item.value_cents) %>
+              <% if item.discount? %>
+                <s class="text-muted">
+                  <%= cents_to_currency(item.gross_value_cents) %>
+                </s>
+
+                <b>
+                  <%= cents_to_currency(item.liquid_value_cents) %>
+                </b>
+              <% else %>
+                <%= cents_to_currency(item.liquid_value_cents) %>
+              <% end %>
             </div>
           </div>
         </li>
@@ -36,7 +46,7 @@
           </div>
 
           <div class="col-6 text-end">
-            <%= cents_to_currency(@order.total_value_cents) %>
+            <%= cents_to_currency(@order.liquid_value_cents) %>
           </div>
         </div>
       </li>

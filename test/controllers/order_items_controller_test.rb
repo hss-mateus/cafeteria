@@ -27,10 +27,10 @@ class OrderItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update order total value" do
-    order = create(:order, status: :scratch, total_value_cents: 0, user: @user)
+    order = create(:order, status: :scratch, liquid_value_cents: 0, user: @user)
     product = create(:product, price_cents: 20)
 
-    assert_changes "order.reload.total_value_cents", from: 0, to: 20 do
+    assert_changes "order.reload.liquid_value_cents", from: 0, to: 20 do
       post order_items_path, params: { product_id: product.id }
     end
 

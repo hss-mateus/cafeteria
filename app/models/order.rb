@@ -3,12 +3,14 @@
 # Table name: orders
 #
 #  id                   :integer          not null, primary key
+#  discount_cents       :integer          default(0), not null
+#  gross_value_cents    :integer          default(0), not null
+#  liquid_value_cents   :integer          default(0), not null
 #  observation          :text
 #  payment_started_at   :datetime
 #  payment_succeeded_at :datetime
 #  served_at            :datetime
 #  status               :integer          default("scratch"), not null
-#  total_value_cents    :integer          default(0), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  user_id              :integer          not null
@@ -66,8 +68,14 @@ class Order < ApplicationRecord
     end
   end
 
-  def calculate_total_value!
-    update!(total_value_cents: items.sum(:value_cents))
+  def calculate_values!
+    items.each(&:calculate_values!)
+
+    update!(
+      gross_value_cents: items.sum(:liquid_value_cents),
+      discount_cents: items.sum(:discount_cents),
+      liquid_value_cents: items.sum(:liquid_value_cents)
+    )
   end
 
   def payment_token
@@ -86,7 +94,7 @@ class Order < ApplicationRecord
           quantity: item.quantity,
           price_data: {
             currency: "BRL",
-            unit_amount: item.product.price_cents,
+            unit_amount: item.unit_value_cents,
             product_data: { name: item.product.name }
           }
         }

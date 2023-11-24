@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_21_224900) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_22_223027) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -80,10 +80,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_224900) do
     t.integer "order_id", null: false
     t.integer "product_id"
     t.string "name", null: false
-    t.integer "value_cents", null: false
+    t.integer "liquid_value_cents", null: false
     t.integer "quantity", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "gross_value_cents", default: 0, null: false
+    t.integer "discount_cents", default: 0, null: false
     t.index ["order_id", "product_id"], name: "index_order_items_on_order_id_and_product_id", unique: true
     t.index ["order_id"], name: "index_order_items_on_order_id"
     t.index ["product_id"], name: "index_order_items_on_product_id"
@@ -92,13 +94,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_224900) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "status", default: 0, null: false
-    t.integer "total_value_cents", default: 0, null: false
+    t.integer "liquid_value_cents", default: 0, null: false
     t.text "observation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "payment_started_at"
     t.datetime "payment_succeeded_at"
     t.datetime "served_at"
+    t.integer "gross_value_cents", default: 0, null: false
+    t.integer "discount_cents", default: 0, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -122,6 +126,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_224900) do
     t.index ["product_id"], name: "index_ratings_on_product_id"
     t.index ["user_id", "product_id"], name: "index_ratings_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.date "valid_until", null: false
+    t.integer "product_id", null: false
+    t.integer "discount_cents", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_sales_on_product_id"
   end
 
   create_table "shifts", force: :cascade do |t|
@@ -192,6 +205,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_224900) do
   add_foreign_key "products", "categories"
   add_foreign_key "ratings", "products"
   add_foreign_key "ratings", "users"
+  add_foreign_key "sales", "products"
   add_foreign_key "shifts", "users"
   add_foreign_key "stock_movements", "stock_items", column: "item_id"
   add_foreign_key "table_reservations", "users"

@@ -2,14 +2,16 @@
 #
 # Table name: order_items
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  quantity    :integer          default(1), not null
-#  value_cents :integer          not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  order_id    :integer          not null
-#  product_id  :integer
+#  id                 :integer          not null, primary key
+#  discount_cents     :integer          default(0), not null
+#  gross_value_cents  :integer          default(0), not null
+#  liquid_value_cents :integer          not null
+#  name               :string           not null
+#  quantity           :integer          default(1), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  order_id           :integer          not null
+#  product_id         :integer
 #
 # Indexes
 #
@@ -29,7 +31,26 @@ class OrderItem < ApplicationRecord
   validates :quantity, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   before_save do
-    self.value_cents = product.price_cents * quantity
     self.name = product.name
+
+    calculate_values!(save: false)
+  end
+
+  def calculate_values!(save: true)
+    assign_attributes(
+      gross_value_cents: product.price_cents * quantity,
+      discount_cents: product.discount_cents * quantity,
+      liquid_value_cents: product.discounted_price_cents * quantity
+    )
+
+    save! if save
+  end
+
+  def discount?
+    discount_cents.positive?
+  end
+
+  def unit_value_cents
+    ((Money.new(cents: liquid_value_cents) / quantity) * 100).to_i
   end
 end
