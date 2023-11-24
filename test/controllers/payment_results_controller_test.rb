@@ -1,6 +1,6 @@
 require "test_helper"
 
-class OrdersControllerTest < ActionDispatch::IntegrationTest
+class PaymentResultsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = login_user
   end
@@ -24,11 +24,9 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not get show with a invalid token" do
-    order = create(:order, user: @user, status: :payment_started)
+    create(:order, user: @user, status: :payment_started)
 
-    assert_changes "order.reload.status", from: "payment_started", to: "scratch" do
-      get current_order_payment_result_path(token: "invalid", status: :success)
-    end
+    get current_order_payment_result_path(token: "invalid", status: :success)
 
     assert_redirected_to :current_order
   end

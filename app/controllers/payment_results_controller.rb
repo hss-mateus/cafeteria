@@ -6,7 +6,6 @@ class PaymentResultsController < ApplicationController
        @order.payment_succeeded?
       redirect_to @order, notice: t(".success")
     else
-      @order.scratch!
       redirect_to :current_order, alert: t(".failure")
     end
   end

@@ -50,7 +50,6 @@ module ApplicationHelper
     when "scratch" then "secondary"
     when "payment_started" then "info"
     when "payment_succeeded" then "info"
-    when "payment_failed" then "danger"
     when "served" then "success"
     end
   end

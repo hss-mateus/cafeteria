@@ -40,7 +40,6 @@ class Order < ApplicationRecord
     scratch: 0,
     payment_started: 1,
     payment_succeeded: 2,
-    payment_failed: 3,
     served: 4
   }
 
@@ -50,17 +49,16 @@ class Order < ApplicationRecord
     state :scratch, initial: true
     state :payment_started,
           :payment_succeeded,
-          :payment_failed,
           :served
 
     event :start_payment do
-      transitions from: [:scratch, :payment_failed], to: :payment_started, after: :create_session
-      transitions from: [:scratch, :payment_failed], to: :payment_failed
+      transitions from: :scratch, to: :payment_started, after: :create_session
+      transitions from: :scratch, to: :scratch
     end
 
     event :handle_payment_result do
       transitions from: :payment_started, to: :payment_succeeded, if: ->(result) { result == "success" }
-      transitions from: :payment_started, to: :payment_failed
+      transitions from: :payment_started, to: :scratch
     end
 
     event :serve do

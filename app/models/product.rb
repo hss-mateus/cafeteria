@@ -43,7 +43,7 @@ class Product < ApplicationRecord
   def destroy_order_items
     order_items
       .joins(:order)
-      .where(order: { status: [:scratch, :payment_failed] })
+      .where(order: { status: :scratch })
       .destroy_all
   end
 end
