@@ -196,7 +196,7 @@ pt_br:
 
   payment_results:
     show:
-      success: Pedido realizado! Não se esqueça de deixar sua avaliação mais tarde.
+      success: Pagamento confirmado, você ganhou %{reward} pontos! Não se esqueça de deixar sua avaliação mais tarde.
       failure: Falha ao processar pagamento, tente novamente.
 
   stock_items:
