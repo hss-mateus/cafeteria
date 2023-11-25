@@ -8,6 +8,7 @@
 #  activation_token_expires_at  :datetime
 #  crypted_password             :string
 #  email                        :string
+#  loyalty_points               :integer          default(0), not null
 #  name                         :string
 #  remember_me_token            :string
 #  remember_me_token_expires_at :datetime

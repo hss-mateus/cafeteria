@@ -11,6 +11,7 @@
 #  payment_succeeded_at :datetime
 #  served_at            :datetime
 #  status               :integer          default("scratch"), not null
+#  used_loyalty_points  :integer          default(0), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  user_id              :integer          not null
@@ -33,6 +34,8 @@ class Order < ApplicationRecord
   has_many :products, through: :items
 
   accepts_nested_attributes_for :items, reject_if: :all_blank, allow_destroy: true
+
+  validates :used_loyalty_points, numericality: { in: (0..) }
 
   attribute :session
 

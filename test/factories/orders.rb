@@ -11,6 +11,7 @@
 #  payment_succeeded_at :datetime
 #  served_at            :datetime
 #  status               :integer          default("scratch"), not null
+#  used_loyalty_points  :integer          default(0), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  user_id              :integer          not null
