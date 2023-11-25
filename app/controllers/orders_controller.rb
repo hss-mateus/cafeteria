@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :require_items, only: :update
 
   def index
-    @orders = current_user.orders.where.not(status: :scratch)
+    @orders = current_user.orders.where.not(status: :scratch).order(id: :desc)
   end
 
   def show
@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
       @order = current_user.orders.find(id)
     else
       set_order
-      render "current_order"
+      render :current_order
     end
   end
 
