@@ -71,6 +71,10 @@ class Order < ApplicationRecord
     end
   end
 
+  def discount?
+    (discount_cents + used_loyalty_points).positive?
+  end
+
   def calculate_values!
     items.each(&:calculate_values!)
 
@@ -79,6 +83,10 @@ class Order < ApplicationRecord
       discount_cents: items.sum(:discount_cents),
       liquid_value_cents: items.sum(:liquid_value_cents)
     )
+  end
+
+  def maximum_points
+    [(liquid_value_cents + used_loyalty_points), user.loyalty_points].min
   end
 
   def payment_token

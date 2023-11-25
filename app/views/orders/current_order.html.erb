@@ -39,6 +39,31 @@
         </li>
       <% end %>
 
+      <% if @order.maximum_points.positive? %>
+        <li class="list-group-item">
+          <div class="row align-items-center">
+            <div class="col">
+              <%= t(".loyalty_points") %>
+            </div>
+
+            <div class="col">
+              <div class="d-flex align-items-center gap-3">
+                <span class="small text-muted text-nowrap">
+                  <%= t(".maximum", value: @order.maximum_points) %>
+                </span>
+
+                <%= form_with model: @order, url: :current_order, method: :put do |f| %>
+                  <div class="input-group">
+                    <%= f.number_field :used_loyalty_points, class: "form-control", min: 0, max: @order.maximum_points %>
+                    <%= f.submit t(".use"), class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+
       <li class="list-group-item list-group-item-light">
         <div class="row fw-bold">
           <div class="col-6">
@@ -46,7 +71,17 @@
           </div>
 
           <div class="col-6 text-end">
-            <%= cents_to_currency(@order.liquid_value_cents) %>
+            <% if @order.discount? %>
+              <s class="text-muted">
+                <%= cents_to_currency(@order.gross_value_cents) %>
+              </s>
+
+              <b>
+                <%= cents_to_currency(@order.liquid_value_cents) %>
+              </b>
+            <% else %>
+              <%= cents_to_currency(@order.liquid_value_cents) %>
+            <% end %>
           </div>
         </div>
       </li>

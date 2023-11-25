@@ -46,6 +46,21 @@
         </li>
       <% end %>
 
+      <% if @order.discount? %>
+        <li class="list-group-item list-group-item-success d-flex justify-content-between">
+          <div>
+            <span class="badge bg-success rounded-pill">
+              <i class="bi bi-tags-fill"></i>
+            </span>
+            <%= t(".loyalty_discount") %>
+          </div>
+
+          <div class="fw-bold">
+            <%= cents_to_currency(-order.used_loyalty_points) %>
+          </div>
+        </li>
+      <% end %>
+
       <li class="list-group-item list-group-item-light fw-bold d-flex justify-content-between">
         <div>
           <%= t(".total") %>

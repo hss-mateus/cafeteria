@@ -177,10 +177,14 @@ pt_br:
     failure: Adicione pelo menos um item para continuar
     order:
       title: Pedido nº %{number}
+      loyalty_discount: Desconto fidelidade
       total: Total
     current_order:
       title: Pedido
       total: Total
+      loyalty_points: Pontos de fidelidade
+      maximum: "Máximo: %{value}"
+      use: Usar
       pay: Pagar
     status_badge:
       payment_started_at: Feito em %{time}
