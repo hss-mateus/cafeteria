@@ -39,7 +39,7 @@ class Order < ApplicationRecord
 
   attribute :session
 
-  after_update_commit :broadcast_replace_later
+  after_update_commit :broadcast_replace_later, unless: :scratch?
 
   enum status: {
     scratch: 0,

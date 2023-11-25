@@ -16,9 +16,16 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order.start_payment!
+    if params[:start_payment]
+      @order.observation = params.dig(:order, :observation)
+      @order.start_payment!
 
-    redirect_to @order.session.url, status: :see_other, allow_other_host: true
+      redirect_to @order.session.url, status: :see_other, allow_other_host: true
+    else
+      @order.update(order_params)
+
+      render :current_order, status: :unprocessable_entity
+    end
   end
 
   private
@@ -31,5 +38,9 @@ class OrdersController < ApplicationController
     return if @order.items.any?
 
     redirect_to :current_order, alert: t(".failure")
+  end
+
+  def order_params
+    params.require(:order).permit(:used_loyalty_points)
   end
 end

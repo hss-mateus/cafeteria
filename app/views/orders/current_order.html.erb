@@ -87,9 +87,16 @@
       </li>
     </ul>
 
-    <div class="text-center py-3">
-      <%= button_to :current_order, method: :put, class: "btn btn-lg btn-primary fw-bold", form: { data: { turbo: false } } do %>
-        <%= t(".pay") %>
+    <div class="py-3">
+      <%= form_with model: @order, url: [:current_order, start_payment: true], data: { turbo: false } do |f| %>
+        <div class="mb-3">
+          <%= f.label :observation, class: "form-label" %>
+          <%= f.text_field :observation, class: "form-control", placeholder: t(".sample_observation") %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit t(".pay"), class: "btn btn-lg btn-primary fw-bold", disabled: @order.items.none? %>
+        </div>
       <% end %>
     </div>
   </div>

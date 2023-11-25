@@ -44,6 +44,7 @@ pt_br:
         name: Nome
 
       order:
+        observation: Observação
         statuses:
           scratch: Pendente
           payment_started: Pagamento pendente
@@ -179,6 +180,7 @@ pt_br:
       title: Pedido nº %{number}
       loyalty_discount: Desconto fidelidade
       total: Total
+      observation: "Observação: %{message}"
     current_order:
       title: Pedido
       total: Total
@@ -186,6 +188,7 @@ pt_br:
       maximum: "Máximo: %{value}"
       use: Usar
       pay: Pagar
+      sample_observation: "Exemplo: Sem açúcar"
     status_badge:
       payment_started_at: Feito em %{time}
       paid_at: Pago em %{time}

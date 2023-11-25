@@ -70,6 +70,12 @@
           <%= cents_to_currency(order.liquid_value_cents) %>
         </div>
       </li>
+
+      <% if @order.observation.present? %>
+        <li class="list-group-item">
+          <%= t(".observation", message: @order.observation) %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
