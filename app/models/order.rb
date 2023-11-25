@@ -94,10 +94,10 @@ class Order < ApplicationRecord
       cancel_url: current_order_payment_result_url(status: :failed, token: payment_token),
       line_items: items.map { |item|
         {
-          quantity: item.quantity,
+          quantity: 1,
           price_data: {
             currency: "BRL",
-            unit_amount: item.unit_value_cents,
+            unit_amount: item.liquid_value_cents - used_points,
             product_data: { name: item.product.name }
           }
         }

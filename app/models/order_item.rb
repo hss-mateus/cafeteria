@@ -49,8 +49,4 @@ class OrderItem < ApplicationRecord
   def discount?
     discount_cents.positive?
   end
-
-  def unit_value_cents
-    ((Money.new(cents: liquid_value_cents) / quantity) * 100).to_i
-  end
 end
