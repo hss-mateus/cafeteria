@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_25_141932) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_25_181219) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -104,6 +104,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_25_141932) do
     t.integer "gross_value_cents", default: 0, null: false
     t.integer "discount_cents", default: 0, null: false
     t.integer "used_loyalty_points", default: 0, null: false
+    t.string "checkout_url"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

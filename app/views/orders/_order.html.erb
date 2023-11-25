@@ -6,7 +6,7 @@
 
     <%= render "orders/status_badge", order: %>
 
-    <ul class="list-group mt-3">
+    <ul class="list-group my-3">
       <% ratings = order.user.ratings.where(product: order.products).index_by(&:product_id) %>
       <% order.items.each do |item| %>
         <li class="list-group-item">
@@ -46,7 +46,7 @@
         </li>
       <% end %>
 
-      <% if @order.discount? %>
+      <% if order.used_loyalty_points.positive? %>
         <li class="list-group-item list-group-item-success d-flex justify-content-between">
           <div>
             <span class="badge bg-success rounded-pill">
@@ -73,9 +73,23 @@
 
       <% if @order.observation.present? %>
         <li class="list-group-item">
-          <%= t(".observation", message: @order.observation) %>
+          <%= t(".observation", message: order.observation) %>
         </li>
       <% end %>
     </ul>
+
+    <% if order.payment_started? %>
+      <div class="text-center">
+        <%= link_to t(".pay"), order.checkout_url, class: "btn btn-primary btn-lg fw-bold" %>
+      </div>
+    <% elsif order.payment_failed? %>
+      <%= form_with model: order, data: { turbo: false } do |f| %>
+        <%= f.hidden_field :start_payment, value: true %>
+
+        <div class="text-center">
+          <%= f.submit t(".pay"), class: "btn btn-lg btn-primary fw-bold" %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, except: [:index, :show]
+  before_action :set_order, only: :update
   before_action :require_items, only: :update
 
   def index
@@ -10,17 +10,17 @@ class OrdersController < ApplicationController
     if (id = params[:id])
       @order = current_user.orders.find(id)
     else
-      set_order
+      @order = current_user.orders.scratch.first_or_create
       render :current_order
     end
   end
 
   def update
-    if params[:start_payment]
+    if params.dig(:order, :start_payment)
       @order.update!(observation: params.dig(:order, :observation))
       @order.start_payment!
 
-      redirect_to @order.session.url, status: :see_other, allow_other_host: true
+      redirect_to @order.checkout_url, status: :see_other, allow_other_host: true
     else
       @order.update(order_params) && @order.calculate_values!
 
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   private
 
   def set_order
-    @order = current_user.orders.scratch.first_or_create
+    @order = current_user.orders.where.not(status: :served).find(params[:id])
   end
 
   def require_items

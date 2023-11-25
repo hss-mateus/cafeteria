@@ -3,6 +3,7 @@
 # Table name: orders
 #
 #  id                   :integer          not null, primary key
+#  checkout_url         :string
 #  discount_cents       :integer          default(0), not null
 #  gross_value_cents    :integer          default(0), not null
 #  liquid_value_cents   :integer          default(0), not null
@@ -37,9 +38,7 @@ class Order < ApplicationRecord
 
   validates :used_loyalty_points, numericality: { in: (0..) }
 
-  attribute :session
-
-  after_update_commit :broadcast_replace_later, unless: :scratch?
+  after_update_commit :broadcast_replace_later, if: ->{ payment_succeeded? || served? }
 
   enum status: {
     scratch: 0,
@@ -109,7 +108,7 @@ class Order < ApplicationRecord
   def create_session
     remaining_points = used_loyalty_points
 
-    self.session = Stripe::Checkout::Session.create({
+    session = Stripe::Checkout::Session.create({
       mode: "payment",
       success_url: order_payment_result_url(self, status: :success, token: payment_token),
       cancel_url: order_payment_result_url(self, status: :failed, token: payment_token),
@@ -127,6 +126,8 @@ class Order < ApplicationRecord
         }
       }
     })
+
+    self.checkout_url = session.url
   end
 
   def discount_loyalty_points

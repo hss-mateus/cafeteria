@@ -3,6 +3,7 @@
 # Table name: orders
 #
 #  id                   :integer          not null, primary key
+#  checkout_url         :string
 #  discount_cents       :integer          default(0), not null
 #  gross_value_cents    :integer          default(0), not null
 #  liquid_value_cents   :integer          default(0), not null

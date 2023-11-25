@@ -182,6 +182,7 @@ pt_br:
       loyalty_discount: Desconto fidelidade
       total: Total
       observation: "Observação: %{message}"
+      pay: Pagar
     current_order:
       title: Pedido
       total: Total

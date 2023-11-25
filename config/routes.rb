@@ -10,11 +10,11 @@ Rails.application.routes.draw do
     resources :ratings, only: [:create]
   end
 
-  resources :orders, only: [:index, :show] do
+  resources :orders, only: [:index, :show, :update] do
     resource :payment_result, only: [:show]
   end
 
-  resource :order, as: :current_order, only: [:show, :update]
+  resource :order, as: :current_order, only: [:show]
 
   resources :order_items, only: [:create, :destroy]
 

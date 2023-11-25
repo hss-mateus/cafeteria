@@ -54,7 +54,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     order = create(:order, status: :scratch, user: @user, items: [build(:order_item)])
 
     assert_difference "order.reload.used_loyalty_points" do
-      put current_order_path, params: { order: { used_loyalty_points: 1 } }
+      put order_path(order), params: { order: { used_loyalty_points: 1 } }
     end
 
     assert_response :unprocessable_entity
@@ -64,17 +64,17 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     order = create(:order, status: :scratch, user: @user, items: [build(:order_item)])
 
     assert_changes "order.reload.status", from: "scratch", to: "payment_started" do
-      put current_order_path(start_payment: true)
+      put order_path(order, order: { start_payment: true })
     end
 
     assert_redirected_to %r{https://checkout.stripe.com}
   end
 
   test "shouldn't update order status when there is no item" do
-    order = create(:order, user: @user)
+    order = create(:order, user: @user, status: :scratch, items: [])
 
     assert_no_changes "order.reload.status" do
-      put current_order_path
+      put order_path(order)
     end
 
     assert_redirected_to :current_order
