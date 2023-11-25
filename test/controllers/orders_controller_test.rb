@@ -49,11 +49,22 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should calculate loyalty points" do
+    @user.update!(loyalty_points: 1)
+    order = create(:order, status: :scratch, user: @user, items: [build(:order_item)])
+
+    assert_difference "order.reload.used_loyalty_points" do
+      put current_order_path, params: { order: { used_loyalty_points: 1 } }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
   test "should update order status when it has at least one item" do
     order = create(:order, status: :scratch, user: @user, items: [build(:order_item)])
 
     assert_changes "order.reload.status", from: "scratch", to: "payment_started" do
-      put current_order_path
+      put current_order_path(start_payment: true)
     end
 
     assert_redirected_to %r{https://checkout.stripe.com}

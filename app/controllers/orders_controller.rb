@@ -17,12 +17,12 @@ class OrdersController < ApplicationController
 
   def update
     if params[:start_payment]
-      @order.observation = params.dig(:order, :observation)
+      @order.update!(observation: params.dig(:order, :observation))
       @order.start_payment!
 
       redirect_to @order.session.url, status: :see_other, allow_other_host: true
     else
-      @order.update(order_params)
+      @order.update(order_params) && @order.calculate_values!
 
       render :current_order, status: :unprocessable_entity
     end

@@ -57,13 +57,16 @@ class Order < ApplicationRecord
           :served
 
     event :start_payment do
-      transitions from: :scratch, to: :payment_started, after: :create_session
+      transitions from: :scratch, to: :payment_started, after: [:create_session, :discount_loyalty_points]
       transitions from: :scratch, to: :scratch
     end
 
     event :handle_payment_result do
-      transitions from: :payment_started, to: :payment_succeeded, if: ->(result) { result == "success" }
-      transitions from: :payment_started, to: :scratch
+      transitions from: :payment_started,
+                  to: :payment_succeeded,
+                  if: ->(result) { result == "success" },
+                  after: :reward_user
+      transitions from: :payment_started, to: :scratch, after: :restore_loyalty_points
     end
 
     event :serve do
@@ -78,10 +81,12 @@ class Order < ApplicationRecord
   def calculate_values!
     items.each(&:calculate_values!)
 
+    self.used_loyalty_points = [used_loyalty_points, user.loyalty_points].min
+
     update!(
-      gross_value_cents: items.sum(:liquid_value_cents),
-      discount_cents: items.sum(:discount_cents),
-      liquid_value_cents: items.sum(:liquid_value_cents)
+      gross_value_cents: items.sum(:gross_value_cents),
+      discount_cents: items.sum(:discount_cents) + used_loyalty_points,
+      liquid_value_cents: items.sum(:liquid_value_cents) - used_loyalty_points
     )
   end
 
@@ -93,14 +98,23 @@ class Order < ApplicationRecord
     Digest::SHA256.hexdigest([id, user_id, created_at].join)
   end
 
+  def reward
+    liquid_value_cents / 100 * 2
+  end
+
   private
 
   def create_session
+    remaining_points = used_loyalty_points
+
     self.session = Stripe::Checkout::Session.create({
       mode: "payment",
       success_url: order_payment_result_url(self, status: :success, token: payment_token),
       cancel_url: order_payment_result_url(self, status: :failed, token: payment_token),
       line_items: items.map { |item|
+        used_points = [remaining_points, item.liquid_value_cents].min
+        remaining_points -= used_points
+
         {
           quantity: 1,
           price_data: {
@@ -111,5 +125,20 @@ class Order < ApplicationRecord
         }
       }
     })
+  end
+
+  def discount_loyalty_points
+    user.decrement!(:loyalty_points, used_loyalty_points)
+  end
+
+  def restore_loyalty_points
+    user.transaction do
+      user.increment!(:loyalty_points, used_loyalty_points)
+      decrement!(:used_loyalty_points, 0)
+    end
+  end
+
+  def reward_user
+    user.increment!(:loyalty_points, reward)
   end
 end

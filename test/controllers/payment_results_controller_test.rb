@@ -8,7 +8,7 @@ class PaymentResultsControllerTest < ActionDispatch::IntegrationTest
   test "should get show with an payment started order" do
     order = create(:order, user: @user, status: :payment_started)
 
-    get current_order_payment_result_path(token: order.payment_token, status: :success)
+    get order_payment_result_path(order, token: order.payment_token, status: :success)
 
     assert_redirected_to order
   end
@@ -17,16 +17,16 @@ class PaymentResultsControllerTest < ActionDispatch::IntegrationTest
     order = create(:order, user: @user, status: :scratch)
 
     assert_no_changes "order.reload.status" do
-      get current_order_payment_result_path(token: order.payment_token, status: :failed)
+      get order_payment_result_path(order, token: order.payment_token, status: :failed)
     end
 
     assert_response :not_found
   end
 
   test "should not get show with a invalid token" do
-    create(:order, user: @user, status: :payment_started)
+    order = create(:order, user: @user, status: :payment_started)
 
-    get current_order_payment_result_path(token: "invalid", status: :success)
+    get order_payment_result_path(order, token: "invalid", status: :success)
 
     assert_redirected_to :current_order
   end
@@ -35,7 +35,7 @@ class PaymentResultsControllerTest < ActionDispatch::IntegrationTest
     order = create(:order, user: @user, status: :payment_started)
 
     assert_changes "order.reload.status", from: "payment_started", to: "scratch" do
-      get current_order_payment_result_path(token: order.payment_token, status: :failed)
+      get order_payment_result_path(order, token: order.payment_token, status: :failed)
     end
 
     assert_redirected_to :current_order
