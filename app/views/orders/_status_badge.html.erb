@@ -11,6 +11,10 @@
     <%= t(".paid_at", time: l(order.payment_succeeded_at)) %>
   <% end %>
 
+  <% if order.payment_failed? %>
+    <%= t(".payment_started_at", time: l(order.payment_started_at)) %>
+  <% end %>
+
   <% if order.served? %>
     <%= t(".served_at", time: l(order.served_at)) %>
   <% end %>

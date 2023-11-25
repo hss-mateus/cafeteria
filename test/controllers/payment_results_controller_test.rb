@@ -13,7 +13,7 @@ class PaymentResultsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to order
   end
 
-  test "should not get show without an payment started order" do
+  test "should not get show without an scratch order" do
     order = create(:order, user: @user, status: :scratch)
 
     assert_no_changes "order.reload.status" do
@@ -26,18 +26,20 @@ class PaymentResultsControllerTest < ActionDispatch::IntegrationTest
   test "should not get show with a invalid token" do
     order = create(:order, user: @user, status: :payment_started)
 
-    get order_payment_result_path(order, token: "invalid", status: :success)
+    assert_no_changes "order.reload.status" do
+      get order_payment_result_path(order, token: "invalid", status: :success)
+    end
 
-    assert_redirected_to :current_order
+    assert_redirected_to order
   end
 
   test "should not get show with failed status" do
     order = create(:order, user: @user, status: :payment_started)
 
-    assert_changes "order.reload.status", from: "payment_started", to: "scratch" do
+    assert_changes "order.reload.status", from: "payment_started", to: "payment_failed" do
       get order_payment_result_path(order, token: order.payment_token, status: :failed)
     end
 
-    assert_redirected_to :current_order
+    assert_redirected_to order
   end
 end

@@ -49,6 +49,7 @@ pt_br:
           scratch: Pendente
           payment_started: Pagamento pendente
           payment_succeeded: Em preparo
+          payment_failed: Erro no pagamento
           served: Servido
 
       stock_item:

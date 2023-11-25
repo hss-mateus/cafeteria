@@ -60,9 +60,10 @@ class Product < ApplicationRecord
   end
 
   def destroy_order_items
-    order_items
-      .joins(:order)
-      .where(order: { status: :scratch })
-      .destroy_all
+    scope = order_items.joins(:order).where(order: { status: [:scratch, :payment_failed] })
+    order_ids = scope.pluck(:order_id)
+    scope.destroy_all
+
+    Order.where(id: order_ids).find_each(&:calculate_values!)
   end
 end

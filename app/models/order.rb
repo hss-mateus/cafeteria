@@ -45,6 +45,7 @@ class Order < ApplicationRecord
     scratch: 0,
     payment_started: 1,
     payment_succeeded: 2,
+    payment_failed: 3,
     served: 4
   }
 
@@ -54,11 +55,12 @@ class Order < ApplicationRecord
     state :scratch, initial: true
     state :payment_started,
           :payment_succeeded,
+          :payment_failed,
           :served
 
     event :start_payment do
-      transitions from: :scratch, to: :payment_started, after: [:create_session, :discount_loyalty_points]
-      transitions from: :scratch, to: :scratch
+      transitions from: [:scratch, :payment_failed], to: :payment_started, after: [:create_session, :discount_loyalty_points]
+      transitions from: [:scratch, :payment_failed], to: :payment_failed
     end
 
     event :handle_payment_result do
@@ -66,7 +68,7 @@ class Order < ApplicationRecord
                   to: :payment_succeeded,
                   if: ->(result) { result == "success" },
                   after: :reward_user
-      transitions from: :payment_started, to: :scratch, after: :restore_loyalty_points
+      transitions from: :payment_started, to: :payment_failed, after: :restore_loyalty_points
     end
 
     event :serve do
@@ -120,7 +122,7 @@ class Order < ApplicationRecord
           price_data: {
             currency: "BRL",
             unit_amount: item.liquid_value_cents - used_points,
-            product_data: { name: item.product.name }
+            product_data: { name: item.name }
           }
         }
       }
@@ -132,10 +134,7 @@ class Order < ApplicationRecord
   end
 
   def restore_loyalty_points
-    user.transaction do
-      user.increment!(:loyalty_points, used_loyalty_points)
-      decrement!(:used_loyalty_points, 0)
-    end
+    user.increment!(:loyalty_points, used_loyalty_points)
   end
 
   def reward_user

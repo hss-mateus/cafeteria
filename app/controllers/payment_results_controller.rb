@@ -7,7 +7,7 @@ class PaymentResultsController < ApplicationController
        @order.payment_succeeded?
       redirect_to @order, notice: t(".success", reward: @order.reward)
     else
-      redirect_to :current_order, alert: t(".failure")
+      redirect_to @order, alert: t(".failure")
     end
   end
 
