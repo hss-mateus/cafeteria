@@ -1,3 +1,26 @@
+$purple:       #402AA7;
+$green:        #00A86B;
+$yellow:       #FFD700;
+$red:          #FD1015;
+$orange:       #E67E22;
+$gray:         #D3D8E1;
+$dark-gray:    #393F4A;
+$mid-gray:     #7B818B;
+$light-gray:   #F1F3F7;
+$white:        #FFFFFF;
+$black:        #010400;
+$dark-blue:    #234067;
+$blue:         #6D7B91;
+$light-purple: #F1F0F9;
+
+$primary:    $purple;
+$success:    $green;
+$info:       $dark-blue;
+$danger:     $red;
+$warning:    $orange;
+
+$body-color: $dark-gray;
+
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'trix/dist/trix';
