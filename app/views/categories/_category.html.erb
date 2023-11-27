@@ -15,7 +15,7 @@
         <% end %>
 
         <%= link_to category,
-           data: { turbo_method: :delete, turbo_confirm: t(".delete_confirm") },
+           data: { turbo_method: :delete, turbo_confirm: t(".delete_confirm"), confirm_details: "test" },
            class: "btn btn-outline-danger btn-sm" do %>
           <i class="bi bi-trash"></i>
         <% end %>
