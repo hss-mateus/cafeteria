@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def update_flash(message:, type: :notice)
-    turbo_stream.update(:flash) do
+    turbo_stream.append(:flash) do
       render("shared/flash", type:, message:)
     end
   end

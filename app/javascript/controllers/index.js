@@ -14,6 +14,7 @@ import MessageController from "./message_controller"
 import UserListController from "./user_list_controller"
 import NestedFieldsController from "./nested_fields_controller"
 import ToggleController from "./toggle_controller"
+import FlashController from "./flash_controller"
 
 application.register("mask", MaskController)
 application.register("role", RoleController)
@@ -25,3 +26,4 @@ application.register("message", MessageController)
 application.register("user-list", UserListController)
 application.register("nested-fields", NestedFieldsController)
 application.register("toggle", ToggleController)
+application.register("flash", FlashController)

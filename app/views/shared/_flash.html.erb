@@ -1,5 +1,9 @@
-<div class="alert alert-<%= flash_color(type) %> d-flex align-items-center justify-content-center gap-2 p-1 m-0 mb-3 rounded-0">
-  <i class="bi <%= flash_icon(type) %>"></i>
+<div data-controller="flash" class="toast align-items-center text-bg-<%= flash_color(type) %> border-0">
+  <div class="d-flex">
+    <div class="toast-body">
+      <%= message %>
+    </div>
 
-  <strong><%= message %></strong>
+    <button class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+  </div>
 </div>

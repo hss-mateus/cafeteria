@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div id="flash">
+    <div id="flash" class="toast-container position-fixed bottom-0 end-0 p-3">
       <% flash.each do |type, message| %>
         <%= render "shared/flash", type:, message: %>
       <% end %>
