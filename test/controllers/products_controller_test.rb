@@ -2,7 +2,7 @@ require "test_helper"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product = create(:product)
+    @product = create(:product, daily_special: build(:daily_special))
     login_user
   end
 
@@ -26,7 +26,14 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create with invalid params" do
     assert_no_difference "Product.count" do
-      post products_path, params: { product: { name: @product.name } }
+      post products_path, params: {
+        product: {
+          name: @product.name,
+          daily_special_attributes: {
+            discount_cents: 99999999
+          }
+        }
+      }
     end
 
     assert_response :unprocessable_entity

@@ -5,9 +5,9 @@
       </h1>
 
       <% if @product.rating.positive? %>
-        <div class="badge bg-warning text-dark border border-dark">
+        <div class="badge bg-light text-dark shadow shadow-sm">
           <small><%= number_with_precision(@product.rating, precision: 1) %></small>
-          <i class="bi bi-star"></i>
+          <i class="bi bi-star-fill text-warning"></i>
         </div>
       <% end %>
 

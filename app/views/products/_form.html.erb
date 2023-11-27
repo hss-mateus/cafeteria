@@ -48,8 +48,37 @@
         <%= render "alergenic_ingredient_fields", f: af %>
       <% end %>
     </div>
-
   </div>
+
+  <%= f.fields_for :daily_special, (@product.daily_special || DailySpecial.new) do |df| %>
+    <div data-controller="toggle">
+      <div class="form-check mb-3">
+        <%= df.label :_destroy, DailySpecial.model_name.human, class: "form-check-label" %>
+        <%= df.check_box :_destroy,
+           {
+             class: "form-check-input",
+             data: { toggle_target: :toggler, action: "toggle#perform" },
+             checked: !(df.object.new_record? || df.object.marked_for_destruction?) || df.object.changes.any?,
+           },
+           false,
+           true %>
+      </div>
+
+      <div data-toggle-target="hidden">
+        <div class="mb-3">
+          <%= df.label :week_day %>
+          <%= df.collection_select :week_day, (0..6), :itself, ->{ I18n.t("date.day_names")[_1] }, {}, class: "form-select" %>
+          <%= df.error_for :week_day %>
+        </div>
+
+        <div class="mb-3">
+          <%= df.label :discount_cents %>
+          <%= df.text_field :discount_cents, class: "form-control", data: { mask_target: :moneyInput } %>
+          <%= df.error_for :discount_cents %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <%= f.submit class: "btn btn-primary" %>
 <% end %>

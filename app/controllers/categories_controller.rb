@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
+    @daily_specials = DailySpecial.where(week_day: Time.zone.today.wday).map(&:product)
   end
 
   def new

@@ -52,6 +52,11 @@ class ProductsController < ApplicationController
         :id,
         :_destroy,
         :name
+      ],
+      daily_special_attributes: [
+        :_destroy,
+        :week_day,
+        :discount_cents
       ]
     )
   end

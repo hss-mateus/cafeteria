@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_25_181219) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_27_150102) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -62,6 +62,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_25_181219) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
+  end
+
+  create_table "daily_specials", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "week_day", null: false
+    t.integer "discount_cents", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_daily_specials_on_product_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -201,6 +210,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_25_181219) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "alergenic_ingredients", "products"
+  add_foreign_key "daily_specials", "products"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"

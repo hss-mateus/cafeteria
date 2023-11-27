@@ -24,6 +24,7 @@ pt_br:
       stock_movement: Movimentação
       product: Produto
       sale: Oferta
+      daily_special: Especial do Dia
     attributes:
       user:
         name: Nome
@@ -90,6 +91,10 @@ pt_br:
       table_reservation:
         table_number: Mesa
 
+      daily_special:
+        week_day: Dia da semana
+        discount_cents: Desconto
+
   layouts:
     application:
       register: Cadastrar
@@ -149,6 +154,7 @@ pt_br:
     index:
       header: Menu
       new: Nova Categoria
+      daily_specials: Especiais do Dia
     create:
       new: Nova Categoria
       success: Categoria adicionada com sucesso

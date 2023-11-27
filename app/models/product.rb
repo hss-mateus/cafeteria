@@ -27,8 +27,10 @@ class Product < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :alergenic_ingredients, dependent: :destroy
   has_many :sales, dependent: :destroy
+  has_one :daily_special, dependent: :destroy
 
   accepts_nested_attributes_for :alergenic_ingredients, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :daily_special, update_only: true, allow_destroy: true
 
   has_rich_text :description
 
@@ -42,11 +44,20 @@ class Product < ApplicationRecord
   after_commit :destroy_order_items, on: :destroy
 
   def discount?
-    sales.active.any?
+    sales.active.any? || today_daily_special.present?
+  end
+
+  def today_daily_special
+    return unless daily_special&.week_day == Time.zone.today.wday
+
+    daily_special
   end
 
   def discount_cents
-    sales.active.first&.discount_cents || 0
+    sale_discount = sales.active.first&.discount_cents
+    daily_special_discount = today_daily_special&.discount_cents
+
+    [sale_discount, daily_special_discount, 0].compact.max
   end
 
   def discounted_price_cents
