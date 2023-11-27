@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_employee
-    return if current_user&.employee?
+    return if current_user&.employee? || current_user&.manager?
 
     redirect_back_or_to root_path, alert: t("sessions.unauthorized")
   end
