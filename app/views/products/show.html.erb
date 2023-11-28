@@ -14,7 +14,8 @@
     <%= button_to :order_items,
        params: { product_id: @product.id },
        class: "btn btn-primary ms-3",
-       form: { data: { turbo_frame: :_top } } do %>
+       form: { data: { turbo_frame: :_top } },
+       disabled: (current_user&.employee? || current_user&.manager?) do %>
       <%= t(".add") %>
 
       <% if @product.discount? %>
