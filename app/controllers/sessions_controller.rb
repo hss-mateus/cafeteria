@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
 
       @user = User.new(user_params.except(:remember_me))
 
-      render turbo_stream: helpers.update_flash(message: t(".invalid"), type: :alert)
+      render turbo_stream: helpers.update_flash(message: t(".invalid"), type: :alert),
+             status: :unprocessable_entity
     end
   end
 
