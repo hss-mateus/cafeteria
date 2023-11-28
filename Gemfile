@@ -27,6 +27,7 @@ gem "turbo_boost-streams"
 group :development do
   gem "web-console"
   gem "annotate"
+  gem "dockerfile-rails"
 end
 
 group :test do

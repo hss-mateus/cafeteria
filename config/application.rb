@@ -32,7 +32,7 @@ module Cafeteria
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: ["assets", "tasks"])
 
-    Stripe.api_key = Rails.application.credentials.stripe.api_key
+    Stripe.api_key = Rails.application.credentials.stripe&.api_key
 
     Groupdate.register_adapter "litedb", Groupdate::Adapters::SQLiteAdapter
     Groupdate.time_zone = "UTC"
