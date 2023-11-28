@@ -14,7 +14,7 @@ class Manager::StatisticsController < Manager::ApplicationController
       .transform_values { Money.to_value(_1) }
 
     @most_sold_products = OrderItem
-      .joins(:order)
+      .joins(:order, :product)
       .where(order: { status: :served, served_at: 1.year.ago.. })
       .group(:product)
       .sum(:quantity)
