@@ -27,6 +27,63 @@
 
         <div class="collapse navbar-collapse" id="navbar-items">
           <ul class="navbar-nav ms-auto">
+            <% if current_user&.employee? || current_user&.manager? %>
+              <li class="nav-item">
+                <%= link_to t(".table_reservations"), [:employee, :table_reservations], class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to t(".chat"), [:employee, :users], class: "nav-link" %>
+              </li>
+            <% end %>
+
+            <% if current_user&.employee? %>
+              <li class="nav-item">
+                <%= link_to t(".shifts"), [:employee, :shifts], class: "nav-link" %>
+              </li>
+            <% end %>
+
+            <% if current_user&.manager? %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                  <%= t(".stock") %>
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to t(".stock_items"), [:manager, :stock_items], class: "dropdown-item" %>
+                    <%= link_to t(".stock_movements"), [:manager, :stock_movements], class: "dropdown-item" %>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to t(".shifts"), [:manager, :shifts], class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to t(".sales"), [:manager, :sales], class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to t(".statistics"), [:manager, :statistics], class: "nav-link" %>
+              </li>
+            <% end %>
+
+            <% if current_user&.customer? %>
+              <li class="nav-item">
+                <%= link_to t(".table_reservations"), :table_reservations, class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to t(".orders"), :orders, class: "nav-link" %>
+              </li>
+
+              <li class="nav-item">
+                <%= link_to t(".order"), :current_order, class: "nav-link" %>
+              </li>
+            <% end %>
+
             <% if logged_in? %>
               <li class="nav-item">
                 <%= link_to t(".logout"), :session, class: "nav-link", data: { turbo_method: :delete } %>

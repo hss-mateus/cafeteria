@@ -97,6 +97,16 @@ pt_br:
 
   layouts:
     application:
+      table_reservations: Reservas
+      chat: Chat
+      shifts: Turnos
+      stock: Estoque
+      stock_items: Itens
+      stock_movements: Movimentações
+      sales: Ofertas
+      statistics: Estatísticas
+      orders: Histórico
+      order: Pedido
       register: Cadastrar
       login: Login
       logout: Logout
