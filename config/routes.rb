@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "static_pages#home"
+  root to: "categories#index"
 
   resource :registration, only: [:new, :create, :edit, :update]
   resource :session, only: [:new, :create, :destroy]
@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   end
 
   resource :order, as: :current_order, only: [:show]
-
   resources :order_items, only: [:create, :destroy]
+  resources :table_reservations, only: [:index, :new, :create, :destroy]
 
   namespace :manager do
     resources :shifts, only: [:index]
@@ -38,6 +38,4 @@ Rails.application.routes.draw do
       resources :messages, only: [:index, :create]
     end
   end
-
-  resources :table_reservations, only: [:index, :new, :create, :destroy]
 end

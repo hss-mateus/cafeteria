@@ -1,9 +1,0 @@
-<div class="text-center">
-  <h1 class="fw-bold my-5">
-    <%= t(".header") %>
-  </h1>
-
-  <% unless logged_in? %>
-    <%= link_to t(".register"), [:new, :registration], class: "btn btn-lg btn-primary" %>
-  <% end %>
-</div>
