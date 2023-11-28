@@ -42,7 +42,9 @@ class Sale < ApplicationRecord
     return if errors[:discount_cents].any?
     return if discount_cents < product.price_cents
 
-    errors.add(:discount_cents, :less_than, count: product.price_cents)
+    count = ApplicationController.helpers.cents_to_currency(product.price_cents)
+
+    errors.add(:discount_cents, :less_than, count:)
   end
 
   def valid_until_in_future
