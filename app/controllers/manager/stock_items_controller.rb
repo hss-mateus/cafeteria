@@ -1,5 +1,4 @@
-class StockItemsController < ApplicationController
-  before_action :require_manager
+class Manager::StockItemsController < Manager::ApplicationController
   before_action :set_item, only: [:edit, :update, :destroy]
 
   def index
@@ -14,7 +13,7 @@ class StockItemsController < ApplicationController
     @item = StockItem.new(item_params)
 
     if @item.save
-      redirect_to :stock_items, notice: t(".success")
+      redirect_to [:manager, :stock_items], notice: t(".success")
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +23,7 @@ class StockItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to :stock_items, notice: t(".success")
+      redirect_to [:manager, :stock_items], notice: t(".success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +32,7 @@ class StockItemsController < ApplicationController
   def destroy
     @item.destroy
 
-    redirect_to :stock_items, notice: t(".success")
+    redirect_to [:manager, :stock_items], notice: t(".success")
   end
 
   private

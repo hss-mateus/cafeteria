@@ -18,13 +18,12 @@ Rails.application.routes.draw do
 
   resources :order_items, only: [:create, :destroy]
 
-  resources :stock_items, except: [:show]
-  resources :stock_movements, except: [:show]
-
   namespace :manager do
     resources :shifts, only: [:index]
     resources :statistics, only: [:index]
     resources :sales, except: [:show]
+    resources :stock_items, except: [:show]
+    resources :stock_movements, except: [:show]
 
     resources :users, only: [] do
       resources :shifts, except: [:index, :show], shallow: true

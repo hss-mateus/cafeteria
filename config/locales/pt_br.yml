@@ -210,41 +210,41 @@ pt_br:
       success: Pagamento confirmado, você ganhou %{reward} pontos! Não se esqueça de deixar sua avaliação mais tarde.
       failure: Falha ao processar pagamento, tente novamente.
 
-  stock_items:
-    index:
-      title: Estoque - Itens
-      new: Novo
-      edit: Editar
-      delete: Excluir
-    new:
-      title: Novo Item
-    create:
-      success: Item adicionado com sucesso
-    edit:
-      title: Editar Item
-    update:
-      success: Item atualizado com sucesso
-    destroy:
-      success: Item removido com sucesso
-
-  stock_movements:
-    index:
-      title: Estoque - Movimentações
-      new: Nova
-      edit: Editar
-      delete: Excluir
-    new:
-      title: Nova Movimentação
-    create:
-      success: Movimentação adicionada com sucesso
-    edit:
-      title: Editar Movimentação
-    destroy:
-      success: Movimentação removida com sucesso
-    update:
-      success: Movimentação atualizada com sucesso
-
   manager:
+    stock_items:
+      index:
+        title: Estoque - Itens
+        new: Novo
+        edit: Editar
+        delete: Excluir
+      new:
+        title: Novo Item
+      create:
+        success: Item adicionado com sucesso
+      edit:
+        title: Editar Item
+      update:
+        success: Item atualizado com sucesso
+      destroy:
+        success: Item removido com sucesso
+
+    stock_movements:
+      index:
+        title: Estoque - Movimentações
+        new: Nova
+        edit: Editar
+        delete: Excluir
+      new:
+        title: Nova Movimentação
+      create:
+        success: Movimentação adicionada com sucesso
+      edit:
+        title: Editar Movimentação
+      destroy:
+        success: Movimentação removida com sucesso
+      update:
+        success: Movimentação atualizada com sucesso
+
     shifts:
       shift:
         day_off: Folga

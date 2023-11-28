@@ -1,5 +1,4 @@
-class StockMovementsController < ApplicationController
-  before_action :require_manager
+class Manager::StockMovementsController < Manager::ApplicationController
   before_action :set_movemnt, only: [:edit, :update, :destroy]
 
   def index
@@ -14,7 +13,7 @@ class StockMovementsController < ApplicationController
     @movement = StockMovement.new(movement_params)
 
     if @movement.save
-      redirect_to :stock_movements, notice: t(".success")
+      redirect_to [:manager, :stock_movements], notice: t(".success")
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +23,7 @@ class StockMovementsController < ApplicationController
 
   def update
     if @movement.update(movement_params)
-      redirect_to :stock_movements, notice: t(".success")
+      redirect_to [:manager, :stock_movements], notice: t(".success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -33,7 +32,7 @@ class StockMovementsController < ApplicationController
   def destroy
     @movement.destroy
 
-    redirect_to :stock_movements, notice: t(".success")
+    redirect_to [:manager, :stock_movements], notice: t(".success")
   end
 
   private

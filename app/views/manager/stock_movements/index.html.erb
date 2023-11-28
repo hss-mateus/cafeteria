@@ -3,7 +3,7 @@
     <%= t(".title") %>
   </h1>
 
-  <%= link_to t(".new"), [:new, :stock_movement], class: "btn btn-primary" %>
+  <%= link_to t(".new"), [:new, :manager, :stock_movement], class: "btn btn-primary" %>
 </div>
 
 <table class="table">
@@ -47,9 +47,9 @@
           <%= l(movement.performed_at) %>
         </td>
         <td>
-          <%= link_to t(".edit"), [:edit, movement], class: "btn btn-sm btn-primary" %>
+          <%= link_to t(".edit"), [:edit, :manager, movement], class: "btn btn-sm btn-primary" %>
           <%= link_to t(".delete"),
-             movement,
+             [:manager, movement],
              class: "btn btn-sm btn-outline-danger",
              data: { turbo_method: :delete, turbo_confirm: t("delete_confirmation") } %>
         </td>

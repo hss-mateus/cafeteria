@@ -1,4 +1,4 @@
-<%= form_with model: @item do |f| %>
+<%= form_with model: [:manager, @item] do |f| %>
   <div class="mb-3">
     <%= f.label :name, class: "form-label" %>
     <%= f.text_field :name, class: "form-control" %>

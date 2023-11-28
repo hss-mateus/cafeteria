@@ -3,7 +3,7 @@
     <%= t(".title") %>
   </h1>
 
-  <%= link_to t(".new"), [:new, :stock_item], class: "btn btn-primary" %>
+  <%= link_to t(".new"), [:new, :manager, :stock_item], class: "btn btn-primary" %>
 </div>
 
 <table class="table">
@@ -29,9 +29,9 @@
           <%= human_quantity(item) %>
         </td>
         <td>
-          <%= link_to t(".edit"), [:edit, item], class: "btn btn-sm btn-primary" %>
+          <%= link_to t(".edit"), [:edit, :manager, item], class: "btn btn-sm btn-primary" %>
           <%= link_to t(".delete"),
-             item,
+             [:manager, item],
              class: "btn btn-sm btn-outline-danger",
              data: { turbo_method: :delete, turbo_confirm: t("delete_confirmation") } %>
         </td>
