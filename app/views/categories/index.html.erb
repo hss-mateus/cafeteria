@@ -1,7 +1,9 @@
 <div class="d-flex gap-3 align-items-center">
   <h1 class="fw-bold"><%= t(".header") %></h1>
 
-  <%= turbo_frame_tag :new_category do %>
+  <%= turbo_frame_tag :new_category,
+    class: "invisible",
+    data: { controller: :role, role_required_value: :manager } do %>
     <%= link_to t(".new"), [:new, :category], class: "btn btn-outline-primary" %>
   <% end %>
 </div>

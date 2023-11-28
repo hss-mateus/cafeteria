@@ -7,8 +7,6 @@ export default class extends Controller {
     const current_role = document.querySelector("meta[name=user-role]").content
     const required_role = this.requiredValue
 
-    if (current_role !== required_role) {
-      this.element.classList.add("invisible")
-    }
+    this.element.classList.toggle("invisible", current_role !== required_role)
   }
 }

@@ -30,7 +30,7 @@
       <% end %>
     <% end %>
 
-    <div class="btn-group" data-controller="role" data-role-required-value="manager">
+    <div class="btn-group invisible" data-controller="role" data-role-required-value="manager">
       <%= link_to [:edit, @product], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>
         <i class="bi bi-pencil"></i>
       <% end %>

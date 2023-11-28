@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center gap-3">
       <h2><%= category.name %></h2>
 
-      <div class="btn-group" data-controller="role" data-role-required-value="manager">
+      <div class="btn-group invisible" data-controller="role" data-role-required-value="manager">
         <%= link_to [:new, :product, product: { category_id: category.id }],
            class: "btn btn-outline-primary btn-sm",
            data: { turbo_frame: :_top } do %>
