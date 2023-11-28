@@ -6,10 +6,6 @@ import "trix"
 import "@rails/actiontext"
 import "chartkick/chart.js"
 
-if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  document.documentElement.setAttribute("data-bs-theme", "dark")
-}
-
 Turbo.setConfirmMethod((message, element, button) => {
   let modal = document.querySelector("#confirm")
   let confirmButton = modal.querySelector("#confirm-button")
