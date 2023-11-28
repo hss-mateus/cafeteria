@@ -11,14 +11,7 @@ class SessionsController < ApplicationController
 
       @user = User.new(user_params.except(:remember_me))
 
-      message =
-        if failure == :inactive
-          t(".inactive")
-        else
-          t(".invalid")
-        end
-
-      flash.now[:alert] = message
+      flash.now[:alert] = t(".invalid")
       render :new, status: :unprocessable_entity
     end
   end

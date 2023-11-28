@@ -3,9 +3,6 @@
 # Table name: users
 #
 #  id                           :integer          not null, primary key
-#  activation_state             :string
-#  activation_token             :string
-#  activation_token_expires_at  :datetime
 #  crypted_password             :string
 #  email                        :string
 #  loyalty_points               :integer          default(0), not null
@@ -19,7 +16,6 @@
 #
 # Indexes
 #
-#  index_users_on_activation_token   (activation_token)
 #  index_users_on_email              (email) UNIQUE
 #  index_users_on_remember_me_token  (remember_me_token)
 #

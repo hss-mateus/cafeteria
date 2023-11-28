@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_27_150102) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_28_171759) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -195,14 +195,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_27_150102) do
     t.string "salt"
     t.string "remember_me_token"
     t.datetime "remember_me_token_expires_at"
-    t.string "activation_state"
-    t.string "activation_token"
-    t.datetime "activation_token_expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0, null: false
     t.integer "loyalty_points", default: 0, null: false
-    t.index ["activation_token"], name: "index_users_on_activation_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
   end
