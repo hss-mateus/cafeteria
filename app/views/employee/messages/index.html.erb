@@ -3,9 +3,9 @@
 
   <div class="d-flex h-100 flex-column">
     <%= turbo_frame_tag :messages, class: "h-100 p-3 overflow-auto" do %>
-      <% if @pagy.next %>
+      <% if @messages.length >= 40 %>
         <%= turbo_frame_tag :messages,
-           src: { page: @pagy.next, last: @messages.first.id },
+           src: { page: 2, last: @messages.first.id },
            loading: :lazy %>
       <% end %>
 

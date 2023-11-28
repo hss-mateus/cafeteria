@@ -12,7 +12,7 @@ class Employee::MessagesController < Employee::ApplicationController
 
     received_messages.update!(status: :read)
 
-    @pagy, @messages = pagy_countless(scope, items: 40)
+    @pagy, @messages = pagy_countless(scope, items: 40, countless_minimal: true)
   end
 
   def create
