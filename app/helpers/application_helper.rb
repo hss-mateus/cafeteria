@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def flash_color(type)
     case type.to_s
-    when "notice" then "primary"
+    when "notice" then "success"
     when "alert" then "warning"
     end
   end
