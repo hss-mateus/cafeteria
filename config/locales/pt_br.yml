@@ -123,9 +123,8 @@ pt_br:
       title: Cadastro
       header: Crie sua conta
       submit_text: Criar
-      success: Por favor verifique seu email para ativar sua conta
     create:
-      success: Conta criada com sucesso! Ative através do email enviado
+      success: Cadastro realizado com sucesso!
     edit:
       title: Cadastro
       header: Edite sua conta
@@ -143,20 +142,7 @@ pt_br:
       new_user: Novo usuário?
       sign_up: Crie sua conta!
     create:
-      inactive: Você ainda não ativou a sua conta. Ative através do email enviado para você.
       invalid: Email ou senha incorretos
-
-  account_activations:
-    edit:
-      success: Conta ativada com sucesso
-      failure: Link de ativação inválido
-
-  user_mailer:
-    activation_needed:
-      subject: Cafeteria - Ativação de Conta
-      message: Olá, %{name}
-      message2: "Você realizou seu cadastro na cafeteria. Clique no link a seguir para ativar sua conta:"
-      activate: Ativar
 
   categories:
     category:
