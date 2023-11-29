@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :account_activations, only: [:edit]
 
-  resources :categories, except: [:show]
-  resources :products, except: [:index] do
+  resources :categories, only: [:index]
+  resources :products, only: [:show] do
     resources :ratings, only: [:create]
   end
 
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :table_reservations, only: [:index, :new, :create, :destroy]
 
   namespace :manager do
+    resources :categories, except: [:index, :show]
+    resources :products, except: [:index, :show]
     resources :shifts, only: [:index]
     resources :statistics, only: [:index]
     resources :sales, except: [:show]

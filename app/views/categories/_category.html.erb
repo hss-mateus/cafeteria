@@ -4,17 +4,17 @@
       <h2><%= category.name %></h2>
 
       <div class="btn-group invisible" data-controller="role" data-role-required-value="manager">
-        <%= link_to [:new, :product, product: { category_id: category.id }],
+        <%= link_to [:new, :manager, :product, product: { category_id: category.id }],
            class: "btn btn-outline-primary btn-sm",
            data: { turbo_frame: :_top } do %>
           <i class="bi bi-plus-lg"></i>
         <% end %>
 
-        <%= link_to [:edit, category], class: "btn btn-outline-primary btn-sm" do %>
+        <%= link_to [:edit, :manager, category], class: "btn btn-outline-primary btn-sm" do %>
           <i class="bi bi-pencil"></i>
         <% end %>
 
-        <%= link_to category,
+        <%= link_to [:manager, category],
            data: { turbo_method: :delete, turbo_confirm: t(".delete_confirm"), confirm_details: "test" },
            class: "btn btn-outline-danger btn-sm" do %>
           <i class="bi bi-trash"></i>

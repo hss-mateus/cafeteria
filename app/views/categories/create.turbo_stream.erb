@@ -1,7 +1,0 @@
-<%= turbo_stream.append :categories, @category %>
-
-<%= turbo_stream.update :new_category do %>
-  <%= link_to t(".new"), [:new, :category], class: "btn btn-outline-primary" %>
-<% end %>
-
-<%= update_flash message: t(".success") %>

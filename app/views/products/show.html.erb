@@ -32,15 +32,15 @@
     <% end %>
 
     <div class="btn-group invisible" data-controller="role" data-role-required-value="manager">
-      <%= link_to [:edit, @product], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>
+      <%= link_to [:edit, :manager, @product], class: "btn btn-outline-primary ms-3", data: { turbo_frame: :_top } do %>
         <i class="bi bi-pencil"></i>
       <% end %>
 
-      <%= link_to @product,
+      <%= link_to [:manager, @product],
          class: "btn btn-outline-danger",
          data: {
            turbo_method: :delete,
-           turbo_confirm: t(".delete_confirm"),
+           turbo_confirm: t("delete_confirmation"),
            turbo_frame: :_top
          } do %>
         <i class="bi bi-trash"></i>

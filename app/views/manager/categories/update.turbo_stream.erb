@@ -1,0 +1,5 @@
+<%= turbo_stream.update @category do %>
+  <%= render object: @category, partial: "/categories/category" %>
+<% end %>
+
+<%= update_flash message: t(".success") %>

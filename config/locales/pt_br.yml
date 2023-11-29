@@ -151,31 +151,13 @@ pt_br:
       header: Menu
       new: Nova Categoria
       daily_specials: Especiais do Dia
-    create:
-      new: Nova Categoria
-      success: Categoria adicionada com sucesso
-    update:
-      success: Categoria atualizada com sucesso
-    destroy:
-      success: Categoria removida com sucesso
 
   products:
     product:
       details: Detalhes
-    new:
-      header: Novo produto
-    edit:
-      header: Editar produto
-    create:
-      success: Produto criado com sucesso
-    update:
-      success: Produto atualizado com sucesso
     show:
       add: Adicionar
-      delete_confirm: Você tem certeza?
       alergenic_information: "Alérgicos: Contém %{ingredients}"
-    destroy:
-      success: Produto removido com sucesso
 
   orders:
     failure: Adicione pelo menos um item para continuar
@@ -207,6 +189,27 @@ pt_br:
       failure: Falha ao processar pagamento, tente novamente.
 
   manager:
+    categories:
+      create:
+        new: Nova Categoria
+        success: Categoria adicionada com sucesso
+      update:
+        success: Categoria atualizada com sucesso
+      destroy:
+        success: Categoria removida com sucesso
+
+    products:
+      new:
+        header: Novo produto
+      edit:
+        header: Editar produto
+      create:
+        success: Produto criado com sucesso
+      update:
+        success: Produto atualizado com sucesso
+      destroy:
+        success: Produto removido com sucesso
+
     stock_items:
       index:
         title: Estoque - Itens

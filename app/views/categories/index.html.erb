@@ -24,7 +24,7 @@
   <%= turbo_frame_tag :new_category,
     class: "invisible",
     data: { controller: :role, role_required_value: :manager } do %>
-    <%= link_to t(".new"), [:new, :category], class: "btn btn-outline-primary" %>
+    <%= link_to t(".new"), [:new, :manager, :category], class: "btn btn-outline-primary" %>
   <% end %>
 </div>
 
