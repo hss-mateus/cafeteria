@@ -16,13 +16,15 @@
               <%= t(".reservation_number", number: reservation.id) %>
             </div>
 
-            <%= link_to reservation,
+            <% if reservation.date.future? %>
+              <%= link_to reservation,
                   class: "btn btn-sm btn-outline-danger",
                   data: {
                     turbo_method: :delete,
                     turbo_confirm: t("delete_confirmation")
                   } do %>
-              <i class="bi bi-trash"></i>
+                <i class="bi bi-trash"></i>
+              <% end %>
             <% end %>
           </div>
 
