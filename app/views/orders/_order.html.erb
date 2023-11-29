@@ -19,15 +19,17 @@
               <%= item.name %>
             </div>
 
-            <div class="col text-nowrap" data-controller="rating" data-rating-star-count-value="<%= ratings[item.product_id]&.value %>">
-              <% (1..5).each do |i| %>
-                <%= link_to [:product, :ratings, product_id: item.product_id, order_id: order.id, rating: { value: i }],
-                   class: "text-decoration-none",
-                   data: { turbo_method: :post } do %>
-                  <i class="bi bi-star<%= '-fill' if ratings[item.product_id]&.value&.>=(i) %> text-warning"></i>
+            <% if item.product_id %>
+              <div class="col text-nowrap" data-controller="rating" data-rating-star-count-value="<%= ratings[item.product_id]&.value %>">
+                <% (1..5).each do |i| %>
+                  <%= link_to [:product, :ratings, product_id: item.product_id, order_id: order.id, rating: { value: i }],
+                     class: "text-decoration-none",
+                     data: { turbo_method: :post } do %>
+                    <i class="bi bi-star<%= '-fill' if ratings[item.product_id]&.value&.>=(i) %> text-warning"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
 
             <div class="col text-nowrap text-end">
               <% if item.discount? %>

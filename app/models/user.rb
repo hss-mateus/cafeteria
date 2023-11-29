@@ -41,4 +41,8 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 50 }
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, confirmation: true, if: ->(u) { u.new_record? || u.changes[:crypted_password] }
+
+  def first_and_last_names
+    name.split.then { [_1.shift, _1.pop] }.join(" ")
+  end
 end

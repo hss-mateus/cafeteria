@@ -1,0 +1,83 @@
+<%= turbo_stream_from :pending_orders %>
+
+<h1 class="fw-bold">
+  <%= t(".title") %>
+</h1>
+
+<hr />
+
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <h2>
+      <%= t(".pending") %>
+    </h2>
+
+    <div id="pending-orders" class="list-group">
+      <% @pending_orders.each do |order| %>
+        <%= link_to [:employee, order], class: "list-group-item list-group-item-action list-group-item-success" do %>
+          <div class="d-flex align-items-center">
+            <div class="text-success me-2">
+              <i class="bi bi-circle-fill"></i>
+            </div>
+
+            <div>
+              <div class="fw-bold">
+                <%= t(".order_number", number: order.id) %>
+              </div>
+
+              <div>
+                <%= t(".customer", name: order.user.first_and_last_names) %>
+              </div>
+            </div>
+
+            <div class="align-self-start ms-auto">
+              <div class="small text-muted">
+                <%= l(order.payment_succeeded_at, format: "%H:%M") %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <h2>
+      <%= t(".completed") %>
+    </h2>
+
+    <%= turbo_frame_tag :completed_orders do %>
+      <div class="list-group mb-3">
+        <% @completed_orders.each do |order| %>
+          <%= link_to [:employee, order],
+             data: { turbo_frame: :_top },
+             class: "list-group-item list-group-item-action list-group-item-light" do %>
+            <div class="d-flex align-items-center">
+              <div class="me-2">
+                <i class="bi bi-check-circle-fill"></i>
+              </div>
+
+              <div>
+                <div class="fw-bold">
+                  <%= t(".order_number", number: order.id) %>
+                </div>
+
+                <div>
+                  <%= t(".customer", name: order.user.first_and_last_names) %>
+                </div>
+              </div>
+
+              <div class="align-self-start ms-auto">
+                <div class="small text-muted">
+                  <%= l(order.served_at) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <%== pagy_bootstrap_nav(@pagy) %>
+    <% end %>
+  </div>
+</div>
