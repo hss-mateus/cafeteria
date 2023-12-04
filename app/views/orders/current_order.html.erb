@@ -52,7 +52,7 @@
                   <%= t(".maximum", value: @order.maximum_points) %>
                 </span>
 
-                <%= form_with model: @order, url: :current_order, method: :put do |f| %>
+                <%= form_with model: @order do |f| %>
                   <div class="input-group">
                     <%= f.number_field :used_loyalty_points, class: "form-control", min: 0, max: @order.maximum_points %>
                     <%= f.submit t(".use"), class: "btn btn-primary" %>
