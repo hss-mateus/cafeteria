@@ -52,7 +52,7 @@ class Shift < ApplicationRecord
     return if start_at.blank? ||
               errors[:start_at].any? ||
               errors[:end_at].any? ||
-              self.class.where(user_id:, start_at: start_at.all_day).none?
+              self.class.where(user_id:, start_at: start_at.all_day).excluding(self).none?
 
     errors.add(:start_at, :unique_date)
   end
