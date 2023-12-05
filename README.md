@@ -1,24 +1,10 @@
-# README
+# Cafeteria Gourmet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Deploy: https://cafeteria-gourmet.fly.dev/
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Rodando o projeto localmente
+- Faça um clone desse repositório
+- Tenha instalado o [rbenv](https://github.com/rbenv/rbenv), [RVM](https://rvm.io/) ou alguma distribuição do Ruby para seu sistema
+- Instale o runtime javascript [Bun](https://bun.sh/)
+- Rode o executável `bin/setup` na raíz do projeto
+- Inicie o servidor com o comando `bin/rails server`
