@@ -40,6 +40,10 @@
             <div>
               <%= t(".table", number: reservation.table_number) %>
             </div>
+
+            <div>
+              <%= t(".customer", name: reservation.user.first_and_last_names) %>
+            </div>
           </div>
         <% end %>
       </div>

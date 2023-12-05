@@ -310,6 +310,7 @@ pt_br:
         reservation_number: Reserva nº %{number}
         date: "Data: %{date}"
         table: "Mesa: %{number}"
+        customer: "Cliente: %{name}"
       edit:
         title: Editar reserva nº %{number}
       update:
