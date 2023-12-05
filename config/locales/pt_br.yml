@@ -260,6 +260,8 @@ pt_br:
         success: Turno atribuído com sucesso
       edit:
         submit_text: Atualizar
+      update:
+        success: Turno atualizado com sucesso
       destroy:
         success: Turno removido com sucesso
     sales:
