@@ -4,3 +4,9 @@
 options:
   label:
     fly_launch_runtime: rails
+  alpine: true
+  cache: true
+  jemalloc: true
+  parallel: true
+  swap: 512M
+  yjit: true

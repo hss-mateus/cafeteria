@@ -25,6 +25,7 @@ gem "groupdate"
 gem "turbo_boost-streams"
 gem "dartsass-rails"
 gem "bootstrap", github: "twbs/bootstrap-rubygem"
+gem "tzinfo-data"
 
 group :development do
   gem "web-console"
