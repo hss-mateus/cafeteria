@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.3.0"
 
 gem "rails"
+gem "bootsnap"
 gem "propshaft"
 gem "puma"
 gem "importmap-rails"
@@ -37,6 +38,7 @@ group :test do
 end
 
 group :development, :test do
+  gem "spring"
   gem "debug"
   gem "factory_bot_rails"
 end
