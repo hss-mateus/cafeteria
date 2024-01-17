@@ -306,7 +306,7 @@ GEM
     thor (1.3.0)
     tilt (2.3.0)
     timeout (0.4.1)
-    turbo-rails (1.5.0)
+    turbo-rails (2.0.0.pre.beta.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -362,7 +362,7 @@ DEPENDENCIES
   spring
   stimulus-rails
   stripe
-  turbo-rails
+  turbo-rails (~> 2.0.0.pre.beta.2)
   turbo_boost-streams
   tzinfo-data
   web-console

@@ -1,6 +1,7 @@
 import "controllers"
 import { Turbo } from "@hotwired/turbo-rails"
 import "@turbo-boost/streams"
+import "@popperjs/core"
 import "bootstrap"
 import "trix"
 import "@rails/actiontext"
