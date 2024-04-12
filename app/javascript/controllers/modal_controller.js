@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
-import { Modal } from "bootstrap"
+import "bootstrap"
 
 export default class extends Controller {
   connect() {
-    this.modal = new Modal(this.element)
+    this.modal = new bootstrap.Modal(this.element)
   }
 
   open() {

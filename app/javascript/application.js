@@ -1,10 +1,11 @@
-import "./controllers"
+import "controllers"
 import { Turbo } from "@hotwired/turbo-rails"
 import "@turbo-boost/streams"
-import * as bootstrap from "bootstrap"
+import "bootstrap"
 import "trix"
 import "@rails/actiontext"
-import "chartkick/chart.js"
+import "chartkick"
+import "Chart.bundle"
 
 Turbo.setConfirmMethod((message, element, button) => {
   let modal = document.querySelector("#confirm")

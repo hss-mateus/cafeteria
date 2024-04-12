@@ -24,6 +24,7 @@ module Cafeteria
     config.i18n.default_locale = :pt_br
     config.time_zone = "America/Sao_Paulo"
     config.generators.system_tests = nil
+    config.assets.precompile += %w(bootstrap.min.js popper.js)
 
     ArLazyPreload.config.auto_preload = true
 

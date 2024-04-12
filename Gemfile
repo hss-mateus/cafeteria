@@ -1,13 +1,12 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.2"
+ruby "3.3.0"
 
 gem "rails"
 gem "propshaft"
 gem "puma"
-gem "jsbundling-rails"
-gem "cssbundling-rails"
+gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "image_processing"
@@ -23,6 +22,8 @@ gem "stripe"
 gem "chartkick"
 gem "groupdate"
 gem "turbo_boost-streams"
+gem "dartsass-rails"
+gem "bootstrap", github: "twbs/bootstrap-rubygem"
 
 group :development do
   gem "web-console"
