@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:alpine
+    ports:
+      - 3000:3000
+    environment:
+      POSTGRES_PASSWORD: postgres
+    restart: always
+    command: postgres -c fsync=off -c full_page_writes=off
+
+  app:
+    build: .
+    volumes:
+      - ../:/workspaces/cafeteria:cached
+    depends_on:
+      - postgres
+    stdin_open: true
+    tty: true
+    network_mode: "service:postgres"
