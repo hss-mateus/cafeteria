@@ -24,6 +24,7 @@ gem "chartkick"
 gem "groupdate"
 gem "turbo_boost-streams"
 gem "dartsass-rails"
+gem "duktape"
 gem "bootstrap", github: "twbs/bootstrap-rubygem"
 gem "tzinfo-data"
 
